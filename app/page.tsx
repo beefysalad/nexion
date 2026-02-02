@@ -48,7 +48,7 @@ export default function Home() {
 
           {/* Main card */}
           <div className='bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-8 md:p-12 shadow-sm'>
-            {isLoading || updateTestMutation.isPending ? (
+            {isLoading ? (
               <div className='flex flex-col items-center justify-center py-12 space-y-4'>
                 <Spinner className='size-12 text-zinc-900 dark:text-zinc-100' />
                 <p className='text-sm text-zinc-500 dark:text-zinc-400'>

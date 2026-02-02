@@ -16,9 +16,10 @@ async function main() {
   console.log("🌱 Seeding database...");
 
   await prisma.count.upsert({
-    where: { id: 1 },
+    where: { key: "global_counter" },
     update: {},
     create: {
+      key: "global_counter",
       value: 0,
     },
   });
