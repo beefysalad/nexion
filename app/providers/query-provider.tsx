@@ -10,11 +10,11 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 0, // 1 minute
+            staleTime: 0,
             retry: 1,
           },
         },
-      }),
+      })
   );
 
   return (

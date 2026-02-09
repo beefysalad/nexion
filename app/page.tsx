@@ -7,17 +7,19 @@ import { useTest, useUpdateTest } from "./shared/hooks/test/useTest";
 export default function Home() {
   const { data, isLoading, isError } = useTest();
   const updateTestMutation = useUpdateTest();
-  const [optimisticValue, setOptimisticValue] = useState(0);
+  const [optimisticValue, setOptimisticValue] = useState(data?.value || 0);
 
   const onButtonClick = () => {
-    setOptimisticValue((prev:number) => prev + 1);
+    setOptimisticValue((prev: number) => prev + 1);
     updateTestMutation.mutateAsync();
   };
 
-  useEffect(() => {
-    setOptimisticValue(data?.value || 0);
-    console.log("Test data:", data, isLoading);
-  }, [data, isLoading]);
+  // useEffect(() => {
+  //   if (!data) return;
+  //   if (optimisticValue !== null) return; // 👈 key line
+
+  //   setOptimisticValue(data.value);
+  // }, [data, optimisticValue]);
 
   if (isError) {
     return (
@@ -39,7 +41,6 @@ export default function Home() {
     <div className='min-h-screen bg-zinc-50 dark:bg-zinc-950'>
       <main className='flex min-h-screen items-center justify-center px-4 py-16'>
         <div className='w-full max-w-2xl space-y-8'>
-          {/* Header */}
           <div className='text-center space-y-3'>
             <h1 className='text-5xl md:text-6xl font-bold text-zinc-900 dark:text-zinc-100'>
               Boilerplate Test
@@ -49,7 +50,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Main card */}
           <div className='bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-8 md:p-12 shadow-sm'>
             {isLoading ? (
               <div className='flex flex-col items-center justify-center py-12 space-y-4'>
@@ -60,17 +60,15 @@ export default function Home() {
               </div>
             ) : (
               <div className='space-y-8'>
-                {/* Value display */}
                 <div className='text-center space-y-2'>
                   <p className='text-sm font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400'>
-                    DB Test Value
+                    DB Test Value - {data?.message}
                   </p>
                   <h2 className='text-7xl md:text-8xl font-black text-zinc-900 dark:text-zinc-100'>
-                    {optimisticValue || "N/A"}
+                    {data?.value || "N/A"}
                   </h2>
                 </div>
 
-                {/* Stats */}
                 <div className='grid grid-cols-3 gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800'>
                   <div className='text-center space-y-1'>
                     <p className='text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400'>
@@ -113,7 +111,7 @@ export default function Home() {
               size='lg'
               className='bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 px-8 font-semibold'
             >
-              {updateTestMutation.isPending ? "Liking..." : "❤️ Like"}
+              {updateTestMutation.isPending ? "Liking..." : "Like"}
             </Button>
 
             <Button
@@ -121,7 +119,7 @@ export default function Home() {
               variant='outline'
               className='border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 px-8 font-semibold'
             >
-              🔄 Refresh
+              Refresh
             </Button>
           </div>
 

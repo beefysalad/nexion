@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const data = await prisma.count.findFirst();
-    return NextResponse.json(data);
+    return NextResponse.json({ ...data, message: "Hello from Api v1" });
   } catch (error) {
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     console.error("Counter update failed:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
