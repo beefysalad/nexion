@@ -2,7 +2,7 @@
 
 A modern Next.js 16 boilerplate with Prisma ORM, PostgreSQL, TypeScript, and Tailwind CSS. This project provides a solid foundation for building full-stack web applications with best practices and developer experience in mind.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
 - **Database**: PostgreSQL with Prisma ORM
@@ -13,47 +13,53 @@ A modern Next.js 16 boilerplate with Prisma ORM, PostgreSQL, TypeScript, and Tai
 - **Package Manager**: npm
 - **Linting**: ESLint with Next.js config
 
-## 📋 Prerequisites
+## Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - PostgreSQL database
 - npm or yarn
 
-## 🛠️ Installation
+## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd next-boilerplate-prisma
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env.local
 ```
 
 4. Configure your database URL in `.env.local`:
+
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/your_database"
 ```
 
 5. Set up the database:
+
 ```bash
 npx prisma migrate dev
 npx prisma generate
 ```
 
 6. Seed the database (optional):
+
 ```bash
 npm run db:seed
 ```
 
-## 🏃‍♂️ Getting Started
+## Getting Started
 
 Start the development server:
 
@@ -63,7 +69,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── app/                 # Next.js app router pages and layouts
@@ -74,7 +80,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 └── components.json     # shadcn/ui configuration
 ```
 
-## 🗄️ Database
+## Database
 
 This project uses Prisma as the ORM with PostgreSQL. The schema is defined in `prisma/schema.prisma`.
 
@@ -94,11 +100,11 @@ npx prisma studio
 npm run db:seed
 ```
 
-## 🎨 Styling
+## Styling
 
 The project uses Tailwind CSS for styling with shadcn/ui components. Components are configured in `components.json`.
 
-## 📦 Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production (includes database setup)
@@ -106,7 +112,7 @@ The project uses Tailwind CSS for styling with shadcn/ui components. Components 
 - `npm run lint` - Run ESLint
 - `npm run db:seed` - Seed the database
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
@@ -125,13 +131,13 @@ npm run build
 npm run start
 ```
 
-## 📚 Learn More
+## Learn More
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Prisma Documentation](https://www.prisma.io/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [shadcn/ui Documentation](https://ui.shadcn.com)
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to submit issues and enhancement requests!
