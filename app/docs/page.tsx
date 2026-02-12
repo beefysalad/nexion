@@ -535,6 +535,45 @@ npm install`}</code>
                 </div>
               </div>
             </div>
+
+            <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+              <h3 className="mb-4 text-xl font-bold">
+                7. GitHub Workflows & Automation
+              </h3>
+              <div className="space-y-4">
+                <h4 className="font-bold">PR Agent (Qodo Merge)</h4>
+                <p className="text-sm text-zinc-600 dark:text-neutral-400">
+                  The template includes automated PR review and feedback using{' '}
+                  <a
+                    href="https://qodo-merge-docs.qodo.ai/"
+                    target="_blank"
+                    className="font-bold text-zinc-900 underline dark:text-neutral-100"
+                  >
+                    Qodo Merge (PR Agent)
+                  </a>
+                  . This GitHub Action automatically:
+                </p>
+                <ul className="list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-neutral-400">
+                  <li>
+                    Reviews pull requests and provides intelligent feedback
+                  </li>
+                  <li>Suggests code improvements and best practices</li>
+                  <li>Responds to comments on PRs</li>
+                </ul>
+                <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950/30">
+                  <p className="text-xs font-bold text-blue-700 dark:text-blue-400">
+                    ⚙️ SETUP REQUIRED
+                  </p>
+                  <p className="mt-1 text-xs text-blue-600 dark:text-blue-500">
+                    Add your{' '}
+                    <code className="rounded bg-blue-100 px-1 dark:bg-blue-900">
+                      OPENAI_KEY
+                    </code>{' '}
+                    to GitHub repository secrets for PR Agent to work.
+                  </p>
+                </div>
+              </div>
+            </div>
           </section>
 
           <section className="space-y-8 border-t border-zinc-200 pt-16 dark:border-neutral-800">

@@ -31,6 +31,7 @@ This document tracks the core features and technologies implemented in the **Nex
 - **Route Protection**: Global middleware-based protection for private and public routes.
 - **Code Quality**: Prettier configured and enforced for a clean, consistent codebase.
 - **Folder Structure**: Feature-based directory organization for scalability.
+- **PR Agent**: Automated PR reviews and feedback using [Qodo Merge (PR Agent)](https://qodo-merge-docs.qodo.ai/) with GitHub Actions.
 
 ## Database & Models
 
