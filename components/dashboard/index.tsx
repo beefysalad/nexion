@@ -56,7 +56,7 @@ const DashboardComponent = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: '/login' })}
               className="h-9 gap-2 rounded-full px-4 text-zinc-500 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
             >
               <LogOut className="size-4" />
