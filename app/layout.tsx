@@ -3,9 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { QueryProvider } from './providers/query-provider'
 import { ThemeProvider } from './providers/theme-provider'
-import { ThemeToggle } from '@/components/theme-toggle'
+
 import { Toaster } from 'sonner'
 import { SessionProvider } from 'next-auth/react'
+import { Analytics } from '@vercel/analytics/next'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,6 +44,7 @@ export default function RootLayout({
               {children}
               <Toaster richColors position="bottom-center" />
             </QueryProvider>
+            <Analytics />
           </SessionProvider>
         </ThemeProvider>
       </body>
