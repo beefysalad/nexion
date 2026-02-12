@@ -335,53 +335,139 @@ npm install`}</code>
               <h2 className="text-3xl font-bold">Making it yours</h2>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-8">
               <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
-                <h3 className="mb-4 text-xl font-bold">1. Clean up Routes</h3>
-                <p className="mb-4 text-sm text-zinc-600 dark:text-neutral-400">
-                  Once you're familiar with the setup, you can remove the
-                  documentation and seed files to keep your production build
-                  lean.
-                </p>
-                <ul className="list-inside list-disc space-y-2 text-sm text-zinc-500 dark:text-neutral-500">
-                  <li>
-                    Delete the{' '}
-                    <code className="bg-zinc-200 px-1 dark:bg-neutral-800">
-                      app/docs
-                    </code>{' '}
-                    folder.
-                  </li>
-                  <li>
-                    Remove{' '}
-                    <code className="bg-zinc-200 px-1 dark:bg-neutral-800">
-                      prisma/seed.ts
-                    </code>{' '}
-                    if no longer needed.
-                  </li>
-                  <li>
-                    Update{' '}
-                    <code className="bg-zinc-200 px-1 dark:bg-neutral-800">
-                      lib/routes.ts
-                    </code>{' '}
-                    to remove public access to missing paths.
-                  </li>
-                </ul>
+                <h3 className="mb-4 text-xl font-bold">
+                  1. Branding & Styling
+                </h3>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="space-y-4">
+                    <p className="text-sm text-zinc-600 dark:text-neutral-400">
+                      I use{' '}
+                      <span className="font-bold text-zinc-900 dark:text-neutral-100">
+                        Tailwind CSS 4
+                      </span>{' '}
+                      with a CSS-first configuration. Customize your theme
+                      variables directly in:
+                    </p>
+                    <div className="rounded-lg border border-zinc-200 bg-white p-3 font-mono text-xs dark:border-neutral-800 dark:bg-neutral-900">
+                      app/globals.css
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <p className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+                      Pro Tip
+                    </p>
+                    <p className="text-sm text-zinc-500">
+                      Update{' '}
+                      <code className="text-zinc-900 italic dark:text-neutral-100">
+                        --primary
+                      </code>{' '}
+                      and{' '}
+                      <code className="text-zinc-900 italic dark:text-neutral-100">
+                        --radius
+                      </code>{' '}
+                      to instantly change the vibe of the entire app.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+                  <h3 className="mb-4 text-xl font-bold">
+                    2. Evolve the Database
+                  </h3>
+                  <p className="mb-4 text-sm text-zinc-600 dark:text-neutral-400">
+                    Add your business models to{' '}
+                    <code className="rounded bg-zinc-200 px-1 dark:bg-neutral-800">
+                      prisma/schema.prisma
+                    </code>
+                    . After modifying the schema, run:
+                  </p>
+                  <pre className="overflow-x-auto rounded bg-zinc-900 p-3 font-mono text-xs text-zinc-300">
+                    <code>npx prisma migrate dev</code>
+                  </pre>
+                </div>
+
+                <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+                  <h3 className="mb-4 text-xl font-bold">
+                    3. Social Authentication
+                  </h3>
+                  <p className="mb-4 text-sm text-zinc-600 dark:text-neutral-400">
+                    Add OAuth providers (GitHub, Google, etc.) by updating the
+                    providers array in:
+                  </p>
+                  <div className="rounded-lg border border-zinc-200 bg-white p-3 font-mono text-xs dark:border-neutral-800 dark:bg-neutral-900">
+                    lib/auth.config.ts
+                  </div>
+                </div>
               </div>
 
               <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
-                <h3 className="mb-4 text-xl font-bold">2. Replace Home Page</h3>
+                <h3 className="mb-4 text-xl font-bold">
+                  4. Route Protection Logic
+                </h3>
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div className="space-y-4">
+                    <p className="text-sm text-zinc-600 dark:text-neutral-400">
+                      Manage which routes are public, which require
+                      authentication, and which are restricted for logged-in
+                      users.
+                    </p>
+                    <div className="rounded-lg border border-zinc-200 bg-white p-3 font-mono text-xs dark:border-neutral-800 dark:bg-neutral-900">
+                      lib/routes.ts
+                    </div>
+                  </div>
+                  <ul className="list-inside list-disc space-y-2 text-sm text-zinc-500">
+                    <li>
+                      <code className="text-zinc-900 italic dark:text-neutral-100">
+                        PUBLIC_ROUTES
+                      </code>
+                      : Accessible to everyone.
+                    </li>
+                    <li>
+                      <code className="text-zinc-900 italic dark:text-neutral-100">
+                        AUTH_ROUTES
+                      </code>
+                      : Shared routes for login/signup.
+                    </li>
+                    <li>
+                      <code className="text-zinc-900 italic dark:text-neutral-100">
+                        API_AUTH_PREFIX
+                      </code>
+                      : Routes handled by Auth.js.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Clean up */}
+              <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+                <h3 className="mb-4 text-xl font-bold">
+                  5. Production Cleanup
+                </h3>
                 <p className="mb-4 text-sm text-zinc-600 dark:text-neutral-400">
-                  The current lander is designed for the template. Replace it
-                  with your actual application dashboard or landing page.
+                  Once you're ready to ship, remove the demo assets and pages:
                 </p>
-                <p className="text-sm text-zinc-500 dark:text-neutral-500">
-                  Modify{' '}
-                  <code className="bg-zinc-200 px-1 dark:bg-neutral-800">
-                    app/page.tsx
-                  </code>{' '}
-                  to point to your main authenticated app logic or a custom
-                  marketing site.
-                </p>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="rounded-lg border border-zinc-200 bg-white p-3 dark:border-neutral-800 dark:bg-neutral-900">
+                    <p className="text-xs font-bold text-red-500">Delete</p>
+                    <code className="text-[10px] text-zinc-500">app/docs/</code>
+                  </div>
+                  <div className="rounded-lg border border-zinc-200 bg-white p-3 dark:border-neutral-800 dark:bg-neutral-900">
+                    <p className="text-xs font-bold text-red-500">Update</p>
+                    <code className="text-[10px] text-zinc-500">
+                      app/page.tsx
+                    </code>
+                  </div>
+                  <div className="rounded-lg border border-zinc-200 bg-white p-3 dark:border-neutral-800 dark:bg-neutral-900">
+                    <p className="text-xs font-bold text-red-500">Remove</p>
+                    <code className="text-[10px] text-zinc-500">
+                      prisma/seed.ts
+                    </code>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
