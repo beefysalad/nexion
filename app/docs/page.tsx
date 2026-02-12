@@ -464,6 +464,77 @@ npm install`}</code>
                 </div>
               </div>
             </div>
+
+            <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+              <h3 className="mb-4 text-xl font-bold">
+                6. Interactive Dashboard Features
+              </h3>
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h4 className="font-bold">Global Visitor Counter</h4>
+                  <p className="text-sm text-zinc-600 dark:text-neutral-400">
+                    The dashboard includes a real-time visitor counter using the{' '}
+                    <code className="rounded bg-zinc-200 px-1.5 py-0.5 dark:bg-neutral-800">
+                      Count
+                    </code>{' '}
+                    model. It demonstrates:
+                  </p>
+                  <ul className="list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-neutral-400">
+                    <li>
+                      <span className="font-bold text-zinc-900 dark:text-neutral-100">
+                        TanStack Query
+                      </span>{' '}
+                      for real-time data fetching (auto-refetch every 5s)
+                    </li>
+                    <li>
+                      <span className="font-bold text-zinc-900 dark:text-neutral-100">
+                        Optimistic updates
+                      </span>{' '}
+                      with mutation hooks
+                    </li>
+                    <li>
+                      Full-stack implementation: API routes (
+                      <code className="rounded bg-zinc-100 px-1 dark:bg-neutral-800">
+                        /api/counter
+                      </code>
+                      ), data layer (
+                      <code className="rounded bg-zinc-100 px-1 dark:bg-neutral-800">
+                        lib/data/counter.ts
+                      </code>
+                      ), and hooks (
+                      <code className="rounded bg-zinc-100 px-1 dark:bg-neutral-800">
+                        hooks/useCounter.ts
+                      </code>
+                      )
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="font-bold">User Stats</h4>
+                  <p className="text-sm text-zinc-600 dark:text-neutral-400">
+                    The dashboard also includes a user stats card that shows:
+                  </p>
+                  <ul className="list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-neutral-400">
+                    <li>
+                      Account email and registration date using{' '}
+                      <code className="rounded bg-zinc-100 px-1 dark:bg-neutral-800">
+                        date-fns
+                      </code>
+                    </li>
+                  </ul>
+                  <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
+                    <p className="text-xs font-bold text-amber-700 dark:text-amber-400">
+                      💡 TIP
+                    </p>
+                    <p className="mt-1 text-xs text-amber-600 dark:text-amber-500">
+                      Use the counter implementation as a template for adding
+                      your own interactive features with real-time updates!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
 
           <section className="space-y-8 border-t border-zinc-200 pt-16 dark:border-neutral-800">

@@ -2,7 +2,7 @@
 
 This document tracks the core features and technologies implemented in the **Next.js Prisma Boilerplate**.
 
-## 🚀 Core Stack
+## Core Stack
 
 - **Framework**: [Next.js 16 (App Router)](https://nextjs.org/) - High-performance React framework.
 - **Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe development.
@@ -11,17 +11,19 @@ This document tracks the core features and technologies implemented in the **Nex
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS framework with native cascade support.
 - **Components**: [shadcn/ui](https://ui.shadcn.com/) - Beautifully designed components built with Radix UI.
 
-## 🎨 Premium Experience
+## Premium Experience
 
 - **Lander**: A modern, high-conversion landing page with interaction-ready elements.
-- **Dashboard Hub**: A clean, high-contrast Zinc console for authenticated users.
+- **Dashboard Hub**: A clean, high-contrast Zinc console for authenticated users with interactive features:
+  - **Global Visitor Counter**: Real-time counter using TanStack Query with click-to-increment functionality
+  - **User Stats Card**: Displays account information including email and account age
 - **What's New Modal**: An automated, persistence-aware overlay to announce template updates.
 - **Live Auth Demo**: Interactive section on the landing page to showcase the authentication flow.
 - **Glassmorphic Auth Forms**: Redesigned Login and Register forms with a clean grid and card aesthetic.
 - **Theming**: Full Light and Dark mode support out of the box using `next-themes`.
 - **Aesthetics**: Consistent use of rounded-full buttons, high-contrast palettes, and micro-interactions.
 
-## 🛠 Developer Experience
+## Developer Experience
 
 - **Documentation**: Comprehensive `/docs` page detailing setup, architecture, and customization.
 - **Form Management**: Standardized integration of `React Hook Form` and `Zod` validation.
@@ -30,11 +32,11 @@ This document tracks the core features and technologies implemented in the **Nex
 - **Code Quality**: Prettier configured and enforced for a clean, consistent codebase.
 - **Folder Structure**: Feature-based directory organization for scalability.
 
-## 📦 Database & Models
+## Database & Models
 
 - **Standard Schemas**: Pre-configured `User`, `Account`, and `Count` models.
 - **Database Tools**: Scripts for seeding (`npm run db:seed`) and local management via Prisma Studio.
 
 ---
 
-_Last Updated: February 12, 2026_
+_Last Updated: February 13, 2026_
