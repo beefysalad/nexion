@@ -8,7 +8,6 @@ import {
   BookOpen,
   ExternalLink,
   Settings,
-  Layout,
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { WhatsNewModal } from './whats-new-modal'
@@ -66,18 +65,12 @@ const DashboardComponent = () => {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2">
           <DashboardCard
             title="Explore Docs"
             description="Deep dive into the technical architecture and project structure."
             href="/docs"
             icon={<BookOpen className="size-5" />}
-          />
-          <DashboardCard
-            title="Edit Pages"
-            description="Start building your application logic in the /app directory."
-            href="/"
-            icon={<Layout className="size-5" />}
           />
           <DashboardCard
             title="Manage Database"

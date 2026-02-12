@@ -32,11 +32,6 @@ export default auth((req) => {
     return Response.redirect(new URL('/login', nextUrl))
   }
 
-  // Handle special case for root if it's considered public but user wants redirect to dashboard when logged in
-  if (isLoggedIn && nextUrl.pathname === '/') {
-    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
-  }
-
   return
 })
 
