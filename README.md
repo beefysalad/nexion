@@ -9,6 +9,8 @@ A modern Next.js 16 boilerplate with Prisma ORM, PostgreSQL, TypeScript, and Tai
 - **Styling**: Tailwind CSS 4
 - **UI Components**: Radix UI + shadcn/ui
 - **State Management**: TanStack Query (React Query)
+- **Forms**: React Hook Form + Zod
+- **Theming**: next-themes (Dark Mode)
 - **Language**: TypeScript
 - **Package Manager**: npm
 - **Linting**: ESLint with Next.js config
@@ -74,7 +76,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```
 ├── app/                 # Next.js app router pages and layouts
 ├── components/          # Reusable React components
-├── lib/                # Utility functions and configurations
+│   ├── auth/            # Authentication components
+│   └── ui/              # shadcn/ui primitives
+├── hooks/               # Custom React hooks
+├── lib/                 # Utility functions and configurations
+│   └── schemas/         # Zod validation schemas
 ├── prisma/             # Database schema and migrations
 ├── public/             # Static assets
 └── components.json     # shadcn/ui configuration
