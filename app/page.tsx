@@ -284,7 +284,12 @@ export default function Home() {
       <footer className="border-t border-zinc-200 px-6 py-12 dark:border-neutral-800">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 md:flex-row">
           <div className="text-center text-sm text-zinc-500 md:text-left">
-            <p>Built by John Patrick Ryan Mandal</p>
+            <p>
+              Built by{' '}
+              <Link href="https://patr1ck.dev" target="_blank">
+                patr1ck.dev
+              </Link>
+            </p>
             <p className="mt-1 text-zinc-400 dark:text-neutral-600">
               MIT License • Use it however you want
             </p>

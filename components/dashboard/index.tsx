@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {
@@ -12,6 +13,7 @@ import {
   Calendar,
   Mail,
   TrendingUp,
+  Loader2,
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { WhatsNewModal } from './whats-new-modal'
@@ -21,6 +23,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 const DashboardComponent = () => {
   const { data: session } = useSession()
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
   const userName = session?.user?.name || 'Developer'
   const userEmail = session?.user?.email || ''
   const { data: counter, isLoading: counterLoading } = useCounter()
@@ -56,10 +59,18 @@ const DashboardComponent = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => signOut({ callbackUrl: '/login' })}
+              onClick={() => {
+                setIsLoggingOut(true)
+                signOut({ callbackUrl: '/login' })
+              }}
+              disabled={isLoggingOut}
               className="h-9 gap-2 rounded-full px-4 text-zinc-500 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
             >
-              <LogOut className="size-4" />
+              {isLoggingOut ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <LogOut className="size-4" />
+              )}
             </Button>
           </div>
         </div>

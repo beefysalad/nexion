@@ -1,40 +1,33 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import {
-  X,
-  Info, // Changed from Sparkles to Info
-  ShieldCheck,
-  FileText,
-  Github,
-  ArrowRight,
-} from 'lucide-react'
+import { useState } from 'react'
+import { X, Info, GitMerge, Bot, FileText, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const UPDATES = [
   {
-    title: 'Premium Auth Overhaul',
+    title: 'Automated Branch Cleanup',
     description:
-      'Redesigned Sign-in & Sign-up forms with glassmorphism and a clean grid aesthetic.',
-    icon: ShieldCheck,
-    color: 'text-blue-500',
-    bg: 'bg-blue-500/10',
+      'GitHub Actions now automatically delete your branches after they are merged, keeping your repository clean.',
+    icon: GitMerge,
+    color: 'text-orange-500',
+    bg: 'bg-orange-500/10',
+  },
+  {
+    title: 'PR Agent Integration',
+    description:
+      'AI-powered pull request reviews and suggestions directly in your workflow.',
+    icon: Bot,
+    color: 'text-purple-500',
+    bg: 'bg-purple-500/10',
   },
   {
     title: 'Technical Documentation',
     description:
-      'A comprehensive /docs page detailing coding conventions and project architecture.',
+      'Comprehensive guides available at /docs for coding standards and setup.',
     icon: FileText,
-    color: 'text-emerald-500',
-    bg: 'bg-emerald-500/10',
-  },
-  {
-    title: 'Feature Tracking',
-    description:
-      'Active logging of all implemented features in the new FEATURES.md file.',
-    icon: Github,
-    color: 'text-purple-500',
-    bg: 'bg-purple-500/10',
+    color: 'text-blue-500',
+    bg: 'bg-blue-500/10',
   },
 ]
 
@@ -49,13 +42,11 @@ export const WhatsNewModal = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-      {/* Backdrop */}
       <div
         className="animate-in fade-in absolute inset-0 bg-zinc-950/40 backdrop-blur-sm duration-300"
         onClick={handleClose}
       />
 
-      {/* Modal Content */}
       <div className="animate-in zoom-in-95 fade-in relative w-full max-w-lg overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-2xl duration-300 dark:border-neutral-800 dark:bg-neutral-900">
         <div className="p-8">
           <div className="mb-8 flex items-center justify-between">
@@ -66,7 +57,10 @@ export const WhatsNewModal = () => {
               <div>
                 <h2 className="text-xl font-bold tracking-tight">What's New</h2>
                 <p className="mt-0.5 text-xs font-medium tracking-widest text-zinc-500 uppercase">
-                  Template Updates
+                  Template Updates{' '}
+                  <span className="text-zinc-900 lowercase dark:text-neutral-100">
+                    v1.0.5
+                  </span>
                 </p>
               </div>
             </div>
