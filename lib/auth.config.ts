@@ -9,20 +9,29 @@ export default {
       },
     }),
   ],
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
-    async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.id = token.sub
-      }
-      return session
-    },
     async jwt({ token, user }) {
       if (user) {
         token.sub = user.id
         token.email = user.email
         token.name = user.name
+       
+        token.createdAt = user.createdAt
       }
       return token
+    },
+    async session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub
+      }
+      if (session.user && token.createdAt) {
+        
+        session.user.createdAt = token.createdAt
+      }
+      return session
     },
   },
 } satisfies NextAuthConfig
