@@ -18,8 +18,11 @@ export default {
         token.sub = user.id
         token.email = user.email
         token.name = user.name
-       
-        token.createdAt = user.createdAt
+
+        token.createdAt =
+          user.createdAt instanceof Date
+            ? user.createdAt.toISOString()
+            : user.createdAt
       }
       return token
     },
@@ -28,7 +31,6 @@ export default {
         session.user.id = token.sub
       }
       if (session.user && token.createdAt) {
-       
         session.user.createdAt = token.createdAt as string
       }
       return session

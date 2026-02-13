@@ -23,9 +23,7 @@ const Landing = () => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(
-     'npx create-next-app -e beefysalad/nexion'
-    )
+    navigator.clipboard.writeText('npx create-next-app -e beefysalad/nexion')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -190,20 +188,20 @@ const Landing = () => {
           </h2>
           <div className="space-y-6 text-lg leading-relaxed text-zinc-600 dark:text-neutral-400">
             <p>
-              Lately I&apos;ve been in the mood of building side projects
-              using Next and every new project starts the same way: install
-              Next.js, set up Prisma, configure Auth.js, add React Hook Form,
-              wire up TanStack Query, get dark mode working, set up the folder
-              structure that makes sense, write the auth middleware, create the
-              Prisma client singleton...
+              Lately I&apos;ve been in the mood of building side projects using
+              Next and every new project starts the same way: install Next.js,
+              set up Prisma, configure Auth.js, add React Hook Form, wire up
+              TanStack Query, get dark mode working, set up the folder structure
+              that makes sense, write the auth middleware, create the Prisma
+              client singleton...
             </p>
             <p>
               After doing this setup a couple of times, I finally made a
               template for me and maybe for you too! :3
             </p>
             <p>
-              Clone it, change the database URL, and you&apos;re building features.
-              That&apos;s it.
+              Clone it, change the database URL, and you&apos;re building
+              features. That&apos;s it.
             </p>
           </div>
 
@@ -241,9 +239,9 @@ const Landing = () => {
             Want to contribute?
           </h2>
           <p className="mb-12 text-lg text-zinc-600 dark:text-neutral-400">
-            Found a bug? Have an idea? Wanna collaborate on this? I&apos;m always open
-            to collaborations so open an issue or submit a PR. Just keep it
-            clean and follow the existing patterns.
+            Found a bug? Have an idea? Wanna collaborate on this? I&apos;m
+            always open to collaborations so open an issue or submit a PR. Just
+            keep it clean and follow the existing patterns.
           </p>
 
           <div className="space-y-8">
@@ -260,7 +258,7 @@ const Landing = () => {
             <ContributeStep
               num="3"
               title="Open a pull request"
-              desc={  `Describe what you changed and why. I'll review it when I can (I will probably do a LGTM right away~).`}
+              desc={`Describe what you changed and why. I'll review it when I can (I will probably do a LGTM right away~).`}
             />
           </div>
         </div>
