@@ -57,12 +57,12 @@ export default function Home() {
           </div>
 
           <div className="animate-in fade-in slide-in-from-bottom-6 flex flex-col items-center gap-10 delay-300 duration-1000">
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <button
                 onClick={handleCopy}
-                className="group relative h-14 rounded-full bg-zinc-900 px-10 font-bold text-white transition-all hover:bg-zinc-800 hover:shadow-2xl hover:shadow-zinc-900/30 active:scale-95 dark:bg-neutral-50 dark:text-neutral-950 dark:hover:bg-neutral-200 dark:hover:shadow-neutral-50/20"
+                className="group relative h-14 w-full rounded-full bg-zinc-900 px-10 font-bold text-white transition-all hover:bg-zinc-800 hover:shadow-2xl hover:shadow-zinc-900/30 active:scale-95 sm:w-auto dark:bg-neutral-50 dark:text-neutral-950 dark:hover:bg-neutral-200 dark:hover:shadow-neutral-50/20"
               >
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center justify-center gap-2">
                   {copied ? 'Copied to Clipboard' : 'Get Started Now'}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -70,11 +70,12 @@ export default function Home() {
               <Link
                 href="https://github.com/beefysalad/next-prisma-template"
                 target="_blank"
+                className="w-full sm:w-auto"
               >
                 <Button
                   variant="outline"
                   size="lg"
-                  className="h-14 rounded-full border-2 border-zinc-200 px-10 font-bold transition-all hover:bg-zinc-50 hover:shadow-lg active:scale-95 dark:border-neutral-800 dark:hover:bg-neutral-900"
+                  className="h-14 w-full rounded-full border-2 border-zinc-200 px-10 font-bold transition-all hover:bg-zinc-50 hover:shadow-lg active:scale-95 sm:w-auto dark:border-neutral-800 dark:hover:bg-neutral-900"
                 >
                   <Github className="size-5" />
                   GitHub Repository
@@ -83,21 +84,21 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              <div className="flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50/30 p-1 backdrop-blur-md dark:border-neutral-800/50 dark:bg-neutral-900/30">
-                <Link href="/register">
+              <div className="flex w-full flex-wrap items-center justify-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50/30 p-1 backdrop-blur-md dark:border-neutral-800/50 dark:bg-neutral-900/30">
+                <Link href="/register" className="flex-1 sm:flex-none">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-11 rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                    className="h-11 w-full rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm sm:w-auto dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                   >
                     Demo Register
                   </Button>
                 </Link>
-                <Link href="/login">
+                <Link href="/login" className="flex-1 sm:flex-none">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-11 rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                    className="h-11 w-full rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm sm:w-auto dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                   >
                     Demo Login
                   </Button>
@@ -114,12 +115,12 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white/50 p-2 shadow-sm backdrop-blur transition-all hover:border-zinc-300 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/50">
               <div className="flex items-center gap-3 px-4 py-2">
                 <Terminal className="size-4 flex-shrink-0 text-zinc-400 dark:text-neutral-500" />
-                <code className="flex-1 text-left font-mono text-[13px] text-zinc-600 dark:text-neutral-400">
+                <code className="flex-1 overflow-x-auto text-left font-mono text-[13px] text-zinc-600 dark:text-neutral-400">
                   npx create-next-app -e beefysalad/next-prisma-template
                 </code>
                 <button
                   onClick={handleCopy}
-                  className="flex size-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-500 transition-all hover:bg-zinc-900 hover:text-white dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-50 dark:hover:text-neutral-900"
+                  className="flex size-8 flex-shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-500 transition-all hover:bg-zinc-900 hover:text-white dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-50 dark:hover:text-neutral-900"
                 >
                   {copied ? (
                     <Check className="size-4" />
@@ -203,25 +204,26 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-12 flex flex-wrap gap-4">
+          <div className="mt-12 flex w-full flex-col gap-4 sm:flex-row sm:flex-wrap">
             <Link
               href="https://github.com/beefysalad/next-prisma-template"
               target="_blank"
+              className="w-full sm:w-auto"
             >
               <Button
                 size="lg"
-                className="group h-12 gap-2 rounded-full border-2 border-zinc-900 bg-zinc-900 px-8 font-bold text-white transition-all hover:bg-zinc-800 hover:shadow-xl hover:shadow-zinc-900/20 active:scale-95 dark:border-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-200 dark:hover:shadow-neutral-50/10"
+                className="group h-12 w-full gap-2 rounded-full border-2 border-zinc-900 bg-zinc-900 px-8 font-bold text-white transition-all hover:bg-zinc-800 hover:shadow-xl hover:shadow-zinc-900/20 active:scale-95 sm:w-auto dark:border-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-200 dark:hover:shadow-neutral-50/10"
               >
                 <Github className="size-5" />
                 View on GitHub
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link href="/docs">
+            <Link href="/docs" className="w-full sm:w-auto">
               <Button
                 variant="ghost"
                 size="lg"
-                className="h-12 rounded-full px-8 font-bold text-zinc-500 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
+                className="h-12 w-full rounded-full px-8 font-bold text-zinc-500 transition-all hover:bg-zinc-100 hover:text-zinc-900 sm:w-auto dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
               >
                 Read the docs
               </Button>
