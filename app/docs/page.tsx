@@ -1,21 +1,20 @@
 'use client'
 
+import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import {
   ArrowLeft,
   BookOpen,
+  Boxes,
   Code2,
   Database,
-  ShieldCheck,
-  Zap,
-  Terminal,
   FileCode,
-  Lock,
-  Boxes,
   Github,
+  ShieldCheck,
+  Terminal,
+  Zap,
 } from 'lucide-react'
 import Link from 'next/link'
-import { ThemeToggle } from '@/components/theme-toggle'
 
 export default function DocsPage() {
   return (
@@ -65,7 +64,7 @@ export default function DocsPage() {
                     Clone the repo and install dependencies using npm.
                   </p>
                   <pre className="overflow-x-auto rounded-xl bg-zinc-900 p-5 font-mono text-sm text-zinc-300 dark:bg-neutral-900">
-                    <code>{`npx create-next-app -e https://github.com/beefysalad/next-prisma-template my-app
+                    <code className="block break-all whitespace-pre-wrap">{`npx create-next-app -e https://github.com/beefysalad/next-prisma-template my-app
 cd my-app
 npm install`}</code>
                   </pre>
@@ -467,7 +466,7 @@ npm install`}</code>
 
             <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
               <h3 className="mb-4 text-xl font-bold">
-                7. GitHub Workflows & Automation
+                6. GitHub Workflows & Automation
               </h3>
               <div className="space-y-4">
                 <h4 className="font-bold">PR Agent (Qodo Merge)</h4>
@@ -491,7 +490,7 @@ npm install`}</code>
                 </ul>
                 <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950/30">
                   <p className="text-xs font-bold text-blue-700 dark:text-blue-400">
-                    ⚙️ SETUP REQUIRED
+                    SETUP REQUIRED
                   </p>
                   <p className="mt-1 text-xs text-blue-600 dark:text-blue-500">
                     Add your{' '}
