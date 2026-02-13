@@ -24,7 +24,7 @@ const Landing = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      'npx create-next-app -e https://github.com/beefysalad/nexion'
+     'npx create-next-app -e beefysalad/nexion'
     )
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
