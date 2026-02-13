@@ -16,7 +16,7 @@ const Styling = () => {
             Utility-first CSS framework with design tokens.
           </p>
           <div className="rounded-xl bg-zinc-900 p-4 font-mono text-sm text-zinc-300 dark:bg-neutral-950">
-            <div className="text-zinc-500">// lib/utils.ts</div>
+            <div className="text-zinc-500">{`// lib/utils.ts`}</div>
             {`import { cn } from '@/lib/utils';
 // Merge classes safely
 className={cn('px-4 py-2 bg-primary', className)}`}
