@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Next.js Prisma Boilerplate',
+  title: 'Nexion - Fullstack Template',
   description:
     'A standard boilerplate for Next.js + Prisma applications. Created by Patrick',
 }

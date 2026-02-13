@@ -102,7 +102,6 @@ export const LoginForm = () => {
                 </Link>
               </div>
               <div className="relative">
-               
                 <Input
                   {...form.register('password')}
                   id="password"
