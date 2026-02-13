@@ -1,5 +1,3 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import {
@@ -8,37 +6,31 @@ import {
   Boxes,
   Code2,
   Database,
-  FileCode,
+  FileText,
   Github,
+  GitMerge,
+  LifeBuoy,
+  Palette,
+  Rocket,
+  Server,
   ShieldCheck,
   Terminal,
-  Zap,
-  Server,
-  Palette,
-  FileText,
-  Rocket,
   Wrench,
-  LifeBuoy,
-  GitMerge,
-  Trash2,
 } from 'lucide-react'
-import GettingStarted from './getting-started'
-import Authentication from './authentication'
-import Workflows from './workflows'
-import Usage from './usage'
-import Architecture from './architecture'
+import { Metadata } from 'next'
+import Link from 'next/link'
 import ApiRoutes from './api-routes'
-import DatabaseComponent from './database'
+import Architecture from './architecture'
+import Authentication from './authentication'
 import Components from './components'
-import Styling from './styling'
-import Forms from './forms'
+import DatabaseComponent from './database'
 import Deployment from './deployment'
+import Forms from './forms'
+import GettingStarted from './getting-started'
+import Styling from './styling'
 import Troubleshooting from './troubleshooting'
-
-export const metadata: Metadata = {
-  title: 'Documentation | Next.js Prisma Boilerplate',
-  description: 'Complete documentation for the Next.js Prisma Boilerplate',
-}
+import Usage from './usage'
+import Workflows from './workflows'
 
 const DocsComponent = () => {
   return (
