@@ -15,6 +15,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
 import { LoginSchema, TLoginSchema } from '@/lib/schemas/auth'
 import FormErrorMessage from '../ui/form-error-message'
 import { useAuthMutations } from '@/hooks/useAuth'
@@ -64,14 +65,18 @@ export const LoginForm = () => {
                 Email Address
               </Label>
               <div className="relative">
-                <Mail className="absolute top-3 left-3 size-4 text-zinc-400" />
                 <Input
                   {...form.register('email')}
                   id="email"
                   type="email"
                   placeholder="patrick@example.com"
+                  aria-invalid={!!form.formState.errors.email}
                   disabled={loginMutation.isPending}
-                  className="h-11 border-zinc-200 bg-transparent pl-10 transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5"
+                  className={cn(
+                    'h-11 border-zinc-200 bg-transparent transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5',
+                    form.formState.errors.email &&
+                      'border-red-500 focus:border-red-500 focus:ring-red-500/10 dark:border-red-500 dark:focus:border-red-500 dark:focus:ring-red-500/10'
+                  )}
                 />
               </div>
               {form.formState.errors.email && (
@@ -97,14 +102,19 @@ export const LoginForm = () => {
                 </Link>
               </div>
               <div className="relative">
-                <Lock className="absolute top-3 left-3 size-4 text-zinc-400" />
+               
                 <Input
                   {...form.register('password')}
                   id="password"
                   type="password"
                   placeholder="••••••••"
+                  aria-invalid={!!form.formState.errors.password}
                   disabled={loginMutation.isPending}
-                  className="h-11 border-zinc-200 bg-transparent pl-10 transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5"
+                  className={cn(
+                    'h-11 border-zinc-200 bg-transparent transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5',
+                    form.formState.errors.password &&
+                      'border-red-500 focus:border-red-500 focus:ring-red-500/10 dark:border-red-500 dark:focus:border-red-500 dark:focus:ring-red-500/10'
+                  )}
                 />
               </div>
               {form.formState.errors.password && (

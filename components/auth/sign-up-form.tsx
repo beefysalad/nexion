@@ -8,6 +8,7 @@ import { User, Mail, Lock, ArrowRight, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
 import { RegisterSchema, TRegisterSchema } from '@/lib/schemas/auth'
 import FormErrorMessage from '../ui/form-error-message'
 import { useAuthMutations } from '@/hooks/useAuth'
@@ -59,14 +60,18 @@ const SignUpForm = () => {
                 Full Name
               </Label>
               <div className="relative">
-                <User className="absolute top-3 left-3 size-4 text-zinc-400" />
                 <Input
                   {...form.register('name')}
                   id="name"
                   type="text"
                   placeholder="John Patrick Ryan"
+                  aria-invalid={!!form.formState.errors.name}
                   disabled={registerMutation.isPending}
-                  className="h-11 border-zinc-200 bg-transparent pl-10 transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5"
+                  className={cn(
+                    'h-11 border-zinc-200 bg-transparent transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5',
+                    form.formState.errors.name &&
+                      'border-red-500 focus:border-red-500 focus:ring-red-500/10 dark:border-red-500 dark:focus:border-red-500 dark:focus:ring-red-500/10'
+                  )}
                 />
               </div>
               {form.formState.errors.name && (
@@ -84,14 +89,18 @@ const SignUpForm = () => {
                 Email Address
               </Label>
               <div className="relative">
-                <Mail className="absolute top-3 left-3 size-4 text-zinc-400" />
                 <Input
                   {...form.register('email')}
                   id="email"
                   type="email"
                   placeholder="name@example.com"
+                  aria-invalid={!!form.formState.errors.email}
                   disabled={registerMutation.isPending}
-                  className="h-11 border-zinc-200 bg-transparent pl-10 transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5"
+                  className={cn(
+                    'h-11 border-zinc-200 bg-transparent transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5',
+                    form.formState.errors.email &&
+                      'border-red-500 focus:border-red-500 focus:ring-red-500/10 dark:border-red-500 dark:focus:border-red-500 dark:focus:ring-red-500/10'
+                  )}
                 />
               </div>
               {form.formState.errors.email && (
@@ -110,14 +119,18 @@ const SignUpForm = () => {
                   Password
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute top-3 left-3 size-4 text-zinc-400" />
                   <Input
                     {...form.register('password')}
                     id="password"
                     type="password"
                     placeholder="••••••••"
+                    aria-invalid={!!form.formState.errors.password}
                     disabled={registerMutation.isPending}
-                    className="h-11 border-zinc-200 bg-transparent pl-10 transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5"
+                    className={cn(
+                      'h-11 border-zinc-200 bg-transparent transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5',
+                      form.formState.errors.password &&
+                        'border-red-500 focus:border-red-500 focus:ring-red-500/10 dark:border-red-500 dark:focus:border-red-500 dark:focus:ring-red-500/10'
+                    )}
                   />
                 </div>
                 {form.formState.errors.password && (
@@ -135,14 +148,18 @@ const SignUpForm = () => {
                   Confirm
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute top-3 left-3 size-4 text-zinc-400" />
                   <Input
                     {...form.register('confirmPassword')}
                     id="confirmPassword"
                     type="password"
                     placeholder="••••••••"
+                    aria-invalid={!!form.formState.errors.confirmPassword}
                     disabled={registerMutation.isPending}
-                    className="h-11 border-zinc-200 bg-transparent pl-10 transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5"
+                    className={cn(
+                      'h-11 border-zinc-200 bg-transparent transition-all focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/5 dark:border-neutral-800 dark:focus:border-neutral-50 dark:focus:ring-neutral-50/5',
+                      form.formState.errors.confirmPassword &&
+                        'border-red-500 focus:border-red-500 focus:ring-red-500/10 dark:border-red-500 dark:focus:border-red-500 dark:focus:ring-red-500/10'
+                    )}
                   />
                 </div>
                 {form.formState.errors.confirmPassword && (
