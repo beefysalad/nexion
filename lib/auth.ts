@@ -3,7 +3,6 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from './prisma'
 import Credentials from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
-import authConfig from './auth.config'
 
 type UserWithPassword =
   | (Awaited<ReturnType<typeof prisma.user.findUnique>> & {
@@ -13,7 +12,9 @@ type UserWithPassword =
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  ...authConfig,
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -47,4 +48,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id
+        token.email = user.email
+        token.name = user.name
+
+        token.createdAt =
+          user.createdAt instanceof Date
+            ? user.createdAt.toISOString()
+            : user.createdAt
+      }
+      return token
+    },
+    async session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub
+      }
+      if (session.user && token.createdAt) {
+        session.user.createdAt = token.createdAt as string
+      }
+      return session
+    },
+  },
 })

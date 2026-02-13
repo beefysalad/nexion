@@ -44,10 +44,12 @@ This file serves as the primary source of truth for AI agents working on this pr
 │   ├── api/              # Client-side API wrappers (Axios)
 │   ├── data/             # Server-side data access logic (Prisma)
 │   ├── schemas/          # Zod validation schemas
-│   ├── auth.ts           # Auth.js configuration
+│   ├── auth.ts           # NextAuth v5 configuration (consolidated)
+│   ├── routes.ts         # Route definitions for auth middleware
 │   ├── prisma.ts         # Prisma client singleton
 │   └── utils.ts          # Helper functions (cn, etc.)
 ├── prisma/               # Database Schema and Migrations
+├── proxy.ts              # Next.js 16 middleware (auth route protection)
 └── public/               # Static Assets
 ```
 
@@ -68,9 +70,12 @@ This file serves as the primary source of truth for AI agents working on this pr
 
 ### Authentication
 
-- Use `Auth.js` (NextAuth v5).
-- Configuration is in `lib/auth.ts`.
-- Protected routes should use middleware or session checks.
+- Use **NextAuth v5** (Auth.js) with simplified setup.
+- All configuration consolidated in `lib/auth.ts` (session strategy, providers, callbacks).
+- Route protection handled by `proxy.ts` middleware (Next.js 16 convention).
+- Middleware imports `auth()` directly from `lib/auth.ts` for session validation.
+- Protected routes automatically redirect unauthenticated users to `/login`.
+- Auth routes (`/login`, `/register`) automatically redirect authenticated users to `/dashboard`.
 
 ### Forms & Validation
 
