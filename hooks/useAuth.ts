@@ -15,9 +15,6 @@ export function useAuthMutations() {
 
   const loginMutation = useMutation({
     mutationFn: loginUser,
-    onSuccess: () => {
-      router.push('/dashboard')
-    },
   })
 
   return {

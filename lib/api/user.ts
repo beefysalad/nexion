@@ -23,5 +23,7 @@ export const loginUser = async (data: TLoginSchema) => {
     throw new Error(response.error)
   }
 
+  window.location.href = '/dashboard'
+
   return response
 }
