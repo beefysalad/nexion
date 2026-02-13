@@ -32,6 +32,14 @@ This document tracks the core features and technologies implemented in the **Nex
 - **Code Quality**: Prettier configured and enforced for a clean, consistent codebase.
 - **Folder Structure**: Feature-based directory organization for scalability.
 - **PR Agent**: Automated PR reviews and feedback using [Qodo Merge (PR Agent)](https://qodo-merge-docs.qodo.ai/) with GitHub Actions.
+- **GitHub Automation**: Comprehensive issue management automation including:
+  - Interactive issue forms (bug reports, feature requests, questions)
+  - Auto-labeling based on keywords
+  - Auto-assignment to team members
+  - Stale issue management
+  - First-time contributor welcome messages
+  - Issue validation and duplicate detection
+  - Priority labeling for urgent issues
 
 ## Database & Models
 

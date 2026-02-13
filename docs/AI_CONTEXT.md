@@ -24,6 +24,12 @@ This file serves as the primary source of truth for AI agents working on this pr
 ## Project Structure
 
 ```
+├── .github/              # GitHub Configuration
+│   ├── ISSUE_TEMPLATE/   # Issue forms (bug reports, features, questions)
+│   ├── workflows/        # GitHub Actions (auto-label, stale, welcome, etc.)
+│   ├── AUTOMATION.md     # Automation documentation
+│   ├── CODEOWNERS        # Code ownership
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── app/                  # Next.js App Router (pages, layouts, api)
 │   ├── api/              # API Routes (including auth)
 │   ├── login/            # Login page route
@@ -77,6 +83,18 @@ This file serves as the primary source of truth for AI agents working on this pr
 - Use **Tailwind CSS** for styling.
 - Use `cn()` utility for class merging.
 - Support Dark Mode via `next-themes` and `dark:` variant.
+
+## GitHub Automation
+
+- **Issue Forms**: Interactive YAML-based forms for bug reports, feature requests, and questions.
+- **Auto-Labeling**: Issues are automatically labeled based on keywords (auth, database, ui, api, etc.).
+- **Auto-Assignment**: Issues are automatically assigned to team members based on labels.
+- **Stale Management**: Inactive issues are marked stale after 60 days and closed after 7 more days.
+- **Welcome Messages**: First-time contributors receive automated welcome messages.
+- **Issue Validation**: Bug reports are validated for required information.
+- **Duplicate Detection**: Potential duplicate issues are automatically detected and flagged.
+- **Priority Labeling**: Issues are automatically prioritized based on urgency keywords.
+- See `.github/AUTOMATION.md` for full documentation.
 
 ## Database
 
