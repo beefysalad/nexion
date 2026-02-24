@@ -85,13 +85,11 @@ const DashboardComponent = () => {
             </span>
           </h1>
           <p className="mt-2 text-zinc-600 dark:text-neutral-400">
-            Everything looks good today. Here's what you can do next.
+            Everything looks good today. Here&apos;s what you can do next.
           </p>
         </div>
 
-        {/* Stats Grid */}
         <div className="mb-8 grid gap-6 md:grid-cols-2">
-          {/* User Stats Card */}
           <div className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 transition-all hover:border-zinc-900 hover:shadow-xl hover:shadow-zinc-200/50 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-50 dark:hover:shadow-none">
             <div className="mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-zinc-50 text-zinc-500 transition-colors group-hover:bg-zinc-900 group-hover:text-white dark:bg-neutral-800 dark:text-neutral-400 dark:group-hover:bg-neutral-50 dark:group-hover:text-neutral-900">
               <Users className="size-5" />

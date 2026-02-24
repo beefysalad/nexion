@@ -114,6 +114,8 @@ This file serves as the primary source of truth for AI agents working on this pr
 - `npm run lint`: Run ESLint.
 - `npm run db:seed`: Seed the database.
 - `npx prisma studio`: Open Prisma Studio.
+- `npm run clean`: Clears the repository of sample UI pages (docs, landing, dashboard) and sets up a clean Next.js boilerplate.
+- `npm run restore`: Reverts the `npm run clean` changes and restores the sample pages back into their original locations.
 
 ## Documentation & Tracking
 
