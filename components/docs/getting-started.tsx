@@ -65,6 +65,30 @@ npm run dev`}</code>
           </div>
         </div>
       </div>
+
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+        <h3 className="mb-4 text-xl font-bold">Creating a Clean Boilerplate</h3>
+        <p className="mb-4 text-zinc-600 dark:text-neutral-400">
+          If you want to remove the sample UI pages (like this docs page, the
+          landing page, and the example dashboard) to start entirely fresh, you
+          can run the cleanup command:
+        </p>
+        <div className="mb-6 rounded-xl border border-zinc-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
+          <pre className="overflow-x-auto text-sm">
+            <code>npm run clean</code>
+          </pre>
+        </div>
+
+        <p className="mb-4 text-zinc-600 dark:text-neutral-400">
+          If you change your mind and want the sample pages back, you can
+          restore them easily.
+        </p>
+        <div className="mb-2 rounded-xl border border-zinc-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
+          <pre className="overflow-x-auto text-sm">
+            <code>npm run restore</code>
+          </pre>
+        </div>
+      </div>
     </section>
   )
 }
