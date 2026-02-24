@@ -34,8 +34,6 @@ itemsToRestore.forEach((itemPath) => {
       fs.mkdirSync(targetDir, { recursive: true })
     }
 
-    // If the destination is a directory, fs.renameSync works directly.
-    // If it's a file and it exists, we overwrite it.
     if (fs.existsSync(destPath) && fs.statSync(destPath).isFile()) {
       fs.rmSync(destPath)
     }
@@ -47,7 +45,6 @@ itemsToRestore.forEach((itemPath) => {
   }
 })
 
-// Clean up the _sample_content directory if it's empty after restore
 const cleanEmptyFoldersRecursively = (folder) => {
   if (!fs.existsSync(folder)) return
 
@@ -60,7 +57,6 @@ const cleanEmptyFoldersRecursively = (folder) => {
       }
     })
 
-    // Re-evaluate if the folder is empty after cleaning its children
     if (fs.readdirSync(folder).length === 0) {
       fs.rmdirSync(folder)
     }

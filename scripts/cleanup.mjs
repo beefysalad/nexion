@@ -8,7 +8,6 @@ const __dirname = path.dirname(__filename)
 const projectRoot = path.join(__dirname, '..')
 const sampleContentDir = path.join(projectRoot, '_sample_content')
 
-// Create sample content directory if it doesn't exist
 if (!fs.existsSync(sampleContentDir)) {
   fs.mkdirSync(sampleContentDir, { recursive: true })
 }
@@ -41,7 +40,6 @@ itemsToMove.forEach((itemPath) => {
 
 console.log('Overwriting sample pages with minimal boilerplate...')
 
-// Overwrite app/page.tsx
 const appPagePath = path.join(projectRoot, 'app/page.tsx')
 const appPageContent = `export default function Home() {
   return (
@@ -53,7 +51,6 @@ const appPageContent = `export default function Home() {
 }
 `
 if (fs.existsSync(appPagePath)) {
-  // Move old page.tsx to _sample_content too
   const oldAppPageDest = path.join(sampleContentDir, 'app/page.tsx')
   const oldAppPageDir = path.dirname(oldAppPageDest)
   if (!fs.existsSync(oldAppPageDir))
@@ -76,7 +73,6 @@ const appDashboardPageContent = `export default function DashboardPage() {
 }
 `
 if (fs.existsSync(appDashboardPagePath)) {
-  // Move old dashboard page.tsx to _sample_content
   const oldDashDest = path.join(sampleContentDir, 'app/dashboard/page.tsx')
   const oldDashDir = path.dirname(oldDashDest)
   if (!fs.existsSync(oldDashDir)) fs.mkdirSync(oldDashDir, { recursive: true })
