@@ -27,8 +27,6 @@ jobs:
       - name: Build Next.js application
         run: npx prisma generate && npx next build
         env:
-          # Prisma generate only needs the env var defined, but doesn't connect.
-          # We avoid 'npm run build' because it triggers migrations which would connect.
           DATABASE_URL: 'postgresql://dummy:dummy@localhost:5432/dummy'
 
       - name: Install Playwright browsers
