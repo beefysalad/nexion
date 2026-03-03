@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react'
 
 export const registerUser = async (data: TRegisterSchema): Promise<void> => {
   try {
-    const response = await api.post('/register', data)
+    const response = await api.post('/auth/register', data)
     return response.data
   } catch (error) {
     return handleApiError(error)
