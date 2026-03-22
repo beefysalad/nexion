@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build && tsx prisma/seed.ts",
+    "dev:docker": "next dev --hostname 0.0.0.0 --port 3000",
+    "build": "prisma generate && next build",
     "start": "next start",
+    "db:generate": "prisma generate",
+    "db:migrate:deploy": "prisma migrate deploy",
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

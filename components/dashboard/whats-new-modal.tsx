@@ -55,7 +55,9 @@ export const WhatsNewModal = () => {
                 <Info className="size-5" />
               </div>
               <div>
-                <h2 className="text-xl font-bold tracking-tight">What's New</h2>
+                <h2 className="text-xl font-bold tracking-tight">
+                  What&apos;s New
+                </h2>
                 <p className="mt-0.5 text-xs font-medium tracking-widest text-zinc-500 uppercase">
                   Template Updates{' '}
                   <span className="text-zinc-900 lowercase dark:text-neutral-100">
@@ -97,7 +99,7 @@ export const WhatsNewModal = () => {
               onClick={handleClose}
               className="h-12 w-full rounded-full bg-zinc-900 font-bold text-white shadow-lg shadow-zinc-900/10 transition-all hover:bg-zinc-800 active:scale-[0.98] dark:bg-neutral-50 dark:text-neutral-950 dark:shadow-none dark:hover:bg-neutral-200"
             >
-              Got it, let's go!
+              Got it, let&apos;s go!
               <ArrowRight className="ml-2 size-4" />
             </Button>
           </div>

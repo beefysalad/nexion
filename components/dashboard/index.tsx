@@ -14,12 +14,50 @@ import {
   Mail,
   TrendingUp,
   Loader2,
+  FolderTree,
+  Container,
+  ArrowRight,
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { WhatsNewModal } from './whats-new-modal'
 import { ThemeToggle } from '../theme-toggle'
 import { useCounter, useIncrementCounter } from '@/hooks/useCounter'
 import { formatDistanceToNow } from 'date-fns'
+
+const projectTree = [
+  {
+    name: 'app/',
+    description: 'App Router pages, layouts, and API routes.',
+  },
+  {
+    name: 'components/',
+    description: 'Shared UI, auth flows, docs blocks, and dashboard pieces.',
+    children: ['auth/', 'dashboard/', 'docs/', 'landing/', 'ui/'],
+  },
+  {
+    name: 'hooks/',
+    description: 'React hooks for auth and counter state.',
+  },
+  {
+    name: 'lib/',
+    description: 'API clients, data access, schemas, auth, and utilities.',
+    children: ['api/', 'data/', 'schemas/'],
+  },
+  {
+    name: 'prisma/',
+    description: 'Schema, migrations, and seed data.',
+  },
+  {
+    name: 'public/',
+    description: 'Static assets shipped with the app.',
+  },
+]
+
+const dockerSteps = [
+  'cp .env.example .env',
+  'docker compose up --build',
+  'open http://localhost:3000',
+]
 
 const DashboardComponent = () => {
   const { data: session } = useSession()
@@ -153,7 +191,104 @@ const DashboardComponent = () => {
           </div>
         </div>
 
-        {/* Resources Grid */}
+        <div className="mb-8 grid gap-6 xl:grid-cols-[1.3fr_0.9fr]">
+          <section className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+            <div className="mb-6 flex items-start justify-between gap-4">
+              <div>
+                <div className="mb-3 inline-flex size-10 items-center justify-center rounded-2xl bg-zinc-900 text-white dark:bg-neutral-50 dark:text-neutral-900">
+                  <FolderTree className="size-5" />
+                </div>
+                <h2 className="text-xl font-bold">Project Map</h2>
+                <p className="mt-2 max-w-2xl text-sm text-zinc-600 dark:text-neutral-400">
+                  A quick read of the folders you&apos;ll touch most often while
+                  building on top of this starter.
+                </p>
+              </div>
+              <Link
+                href="/docs#architecture"
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-900 hover:text-zinc-900 dark:border-neutral-800 dark:text-neutral-400 dark:hover:border-neutral-50 dark:hover:text-neutral-50"
+              >
+                Explore docs
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+
+            <div className="space-y-4">
+              {projectTree.map((item) => (
+                <div
+                  key={item.name}
+                  className="rounded-2xl border border-zinc-200 bg-zinc-50/80 p-4 dark:border-neutral-800 dark:bg-neutral-950/60"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 rounded-lg bg-white p-2 text-zinc-500 shadow-sm dark:bg-neutral-900 dark:text-neutral-400">
+                      <FolderTree className="size-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <code className="rounded-full bg-zinc-900 px-2.5 py-1 text-xs font-semibold text-white dark:bg-neutral-100 dark:text-neutral-900">
+                          {item.name}
+                        </code>
+                        {item.children && (
+                          <span className="text-xs uppercase tracking-[0.2em] text-zinc-400 dark:text-neutral-500">
+                            core folders
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-2 text-sm text-zinc-600 dark:text-neutral-400">
+                        {item.description}
+                      </p>
+                      {item.children && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {item.children.map((child) => (
+                            <span
+                              key={child}
+                              className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
+                            >
+                              {child}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-zinc-200 bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 text-white shadow-sm dark:border-neutral-800 dark:from-neutral-900 dark:to-neutral-800">
+            <div className="mb-6 inline-flex size-10 items-center justify-center rounded-2xl bg-white/10">
+              <Container className="size-5" />
+            </div>
+            <h2 className="text-xl font-bold">Docker Quickstart</h2>
+            <p className="mt-2 text-sm text-zinc-300">
+              The app and PostgreSQL can now boot together in one command,
+              with Prisma migrations and seed data applied at startup.
+            </p>
+
+            <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="space-y-3 font-mono text-sm">
+                {dockerSteps.map((step, index) => (
+                  <div
+                    key={step}
+                    className="flex items-center gap-3 text-zinc-100"
+                  >
+                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-semibold">
+                      {index + 1}
+                    </span>
+                    <code className="break-all">{step}</code>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="mt-4 text-xs leading-relaxed text-zinc-400">
+              The Compose stack uses a local Postgres container and maps the
+              app to port 3000.
+            </p>
+          </section>
+        </div>
+
         <div className="mb-8">
           <h2 className="mb-4 text-xl font-bold">Resources</h2>
           <div className="grid gap-6 md:grid-cols-2">
@@ -164,10 +299,9 @@ const DashboardComponent = () => {
               icon={<BookOpen className="size-5" />}
             />
             <DashboardCard
-              title="Manage Database"
-              description="Use Prisma Studio to browse and edit your local data."
-              href="https://www.prisma.io/studio"
-              isExternal
+              title="Run With Docker"
+              description="Start the app and PostgreSQL together with the new Compose setup."
+              href="/docs#getting-started"
               icon={<Settings className="size-5" />}
             />
           </div>
