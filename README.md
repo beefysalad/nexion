@@ -18,8 +18,9 @@ A modern Next.js 16 boilerplate with Prisma ORM, PostgreSQL, TypeScript, and Tai
 
 ## Prerequisites
 
-- Node.js 18+
-- PostgreSQL database
+- Node.js 20+
+- PostgreSQL database for local non-Docker development
+- Docker + Docker Compose for the containerized workflow
 - npm or yarn
 
 ## Installation
@@ -77,6 +78,34 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Docker Quickstart
+
+1. Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+2. Start the app and database:
+
+```bash
+docker compose up --build
+```
+
+3. Open [http://localhost:3000](http://localhost:3000).
+
+The Docker entrypoint runs Prisma migrations and seeds the database before the Next.js server starts.
+
+## Docker Development
+
+For hot reload while editing files locally, use the development Compose file instead:
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+This mounts your workspace into the container, runs Next.js in development mode, and watches for file changes.
 
 ## Project Structure
 
@@ -145,8 +174,10 @@ The project uses Tailwind CSS for styling with shadcn/ui components. Components 
 ## Available Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production (includes database setup)
+- `npm run build` - Build for production
 - `npm run start` - Start production server
+- `npm run db:generate` - Generate the Prisma client
+- `npm run db:migrate:deploy` - Apply production migrations
 - `npm run lint` - Run ESLint
 - `npm run format` - Run Prettier to format code
 - `npm run format:check` - Check code formatting with Prettier

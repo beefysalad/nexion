@@ -67,6 +67,26 @@ npm run dev`}</code>
       </div>
 
       <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
+        <h3 className="mb-4 text-xl font-bold">Docker Quickstart</h3>
+        <p className="mb-4 text-zinc-600 dark:text-neutral-400">
+          Prefer running everything in containers? The project now ships with a
+          Dockerfile, Compose stack, and a Postgres service out of the box.
+        </p>
+        <pre className="overflow-x-auto rounded-xl bg-zinc-900 p-5 font-mono text-sm text-zinc-300 dark:bg-neutral-950">
+          <code className="block break-all whitespace-pre-wrap">{`cp .env.example .env
+docker compose up --build`}</code>
+        </pre>
+        <p className="mt-4 text-sm text-zinc-600 dark:text-neutral-400">
+          On startup, the container applies Prisma migrations, seeds the
+          database, and serves the app on{' '}
+          <code className="rounded bg-zinc-200 px-1.5 py-0.5 dark:bg-neutral-800">
+            localhost:3000
+          </code>
+          .
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 dark:border-neutral-800 dark:bg-neutral-900/30">
         <h3 className="mb-4 text-xl font-bold">Creating a Clean Boilerplate</h3>
         <p className="mb-4 text-zinc-600 dark:text-neutral-400">
           If you want to remove the sample UI pages (like this docs page, the

@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nexion
+      POSTGRES_USER: nexion
+      POSTGRES_PASSWORD: nexion
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U nexion -d nexion']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://nexion:nexion@db:5432/nexion
+      AUTH_SECRET: ${AUTH_SECRET:-replace-with-a-secure-random-string}
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
