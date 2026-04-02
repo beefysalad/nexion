@@ -45,7 +45,7 @@ export default function RootLayout({
               {children}
               <Toaster richColors position="bottom-center" />
             </QueryProvider>
-            <Analytics />
+            {/* <Analytics /> */}
           </SessionProvider>
         </ThemeProvider>
       </body>
