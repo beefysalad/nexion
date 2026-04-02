@@ -1,5 +1,6 @@
 import type { User as ClerkUser, UserJSON } from '@clerk/nextjs/server'
 import { auth, currentUser } from '@clerk/nextjs/server'
+import { Prisma } from '@/app/generated/prisma/client'
 
 import prisma from '@/lib/prisma'
 
@@ -70,48 +71,50 @@ const mapClerkWebhookUser = (user: UserJSON): SyncableClerkUser | null => {
 }
 
 export async function upsertClerkUser(input: SyncableClerkUser) {
-  const existingByClerkId = await prisma.user.findUnique({
-    where: { clerkId: input.clerkId },
-  })
-
-  if (existingByClerkId) {
-    return prisma.user.update({
-      where: { id: existingByClerkId.id },
-      data: {
+  try {
+    return await prisma.user.upsert({
+      where: { clerkId: input.clerkId },
+      update: {
         email: input.email,
-        name: input.name ?? existingByClerkId.name,
+        name: input.name,
         image: input.imageUrl,
         emailVerified: input.emailVerified,
       },
-    })
-  }
-
-  const existingByEmail = await prisma.user.findUnique({
-    where: { email: input.email },
-  })
-
-  if (existingByEmail) {
-    return prisma.user.update({
-      where: { id: existingByEmail.id },
-      data: {
+      create: {
         clerkId: input.clerkId,
-        name: input.name ?? existingByEmail.name,
+        email: input.email,
+        name: input.name,
         image: input.imageUrl,
-        emailVerified: input.emailVerified ?? existingByEmail.emailVerified,
+        emailVerified: input.emailVerified,
+        hashedPassword: null,
       },
     })
-  }
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === 'P2002'
+    ) {
+      const existingByEmail = await prisma.user.findUnique({
+        where: { email: input.email },
+      })
 
-  return prisma.user.create({
-    data: {
-      clerkId: input.clerkId,
-      email: input.email,
-      name: input.name,
-      image: input.imageUrl,
-      emailVerified: input.emailVerified,
-      hashedPassword: null,
-    },
-  })
+      if (!existingByEmail) {
+        throw error
+      }
+
+      return prisma.user.update({
+        where: { id: existingByEmail.id },
+        data: {
+          clerkId: input.clerkId,
+          name: input.name ?? existingByEmail.name,
+          image: input.imageUrl,
+          emailVerified: input.emailVerified ?? existingByEmail.emailVerified,
+        },
+      })
+    }
+
+    throw error
+  }
 }
 
 export async function syncCurrentUserToDatabase() {
