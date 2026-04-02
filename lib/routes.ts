@@ -3,7 +3,7 @@
  * These routes do not require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = ['/', '/docs']
+export const publicRoutes: string[] = ['/', '/docs', '/login/sso-callback']
 
 /**
  * An array of routes that are used for authentication
@@ -11,13 +11,6 @@ export const publicRoutes: string[] = ['/', '/docs']
  * @type {string[]}
  */
 export const authRoutes: string[] = ['/login', '/register']
-
-/**
- * The prefix for API authentication routes
- * Routes that start with this prefix are used for API authentication purposes
- * @type {string}
- */
-export const apiAuthPrefix: string = '/api/auth'
 
 /**
  * The default redirect path after logging in

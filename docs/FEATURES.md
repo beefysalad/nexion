@@ -7,7 +7,7 @@ This document tracks the core features and technologies implemented in the **Nex
 - **Framework**: [Next.js 16 (App Router)](https://nextjs.org/) - High-performance React framework.
 - **Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe development.
 - **Database**: [Prisma 7](https://www.prisma.io/) - Modern ORM with PostgreSQL support.
-- **Authentication**: [Auth.js v5 (Beta)](https://authjs.dev/) - Secure, flexible, and Edge-compatible authentication.
+- **Authentication**: [Clerk](https://clerk.com/) - Hosted authentication with Google OAuth, email/password, middleware protection, and webhooks.
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS framework with native cascade support.
 - **Components**: [shadcn/ui](https://ui.shadcn.com/) - Beautifully designed components built with Radix UI.
 
@@ -43,7 +43,7 @@ This document tracks the core features and technologies implemented in the **Nex
 
 ## Database & Models
 
-- **Standard Schemas**: Pre-configured `User`, `Account`, and `Count` models.
+- **Standard Schemas**: Pre-configured `User` and `Count` models, with Clerk identity synced into Prisma.
 - **Database Tools**: Scripts for seeding (`npm run db:seed`) and local management via Prisma Studio.
 
 ---

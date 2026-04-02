@@ -3,7 +3,6 @@ import { PrismaPg } from '@prisma/adapter-pg'
 import { Pool } from 'pg'
 
 import 'dotenv/config'
-import bcrypt from 'bcryptjs'
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -15,21 +14,21 @@ const prisma = new PrismaClient({ adapter })
 
 async function main() {
   console.log('🌱 Seeding database...')
-  const hashedPassword = await bcrypt.hash('123456', 10)
-  const findUser = await prisma.user.findUnique({
+  const counter = await prisma.count.findUnique({
     where: {
-      email: 'test@test.com',
+      key: 'global_counter',
     },
   })
-  if (findUser) {
-    console.log('User already exists')
+
+  if (counter) {
+    console.log('Counter already exists')
     return
   }
-  await prisma.user.create({
+
+  await prisma.count.create({
     data: {
-      email: 'test@test.com',
-      hashedPassword: hashedPassword,
-      name: 'Test account',
+      key: 'global_counter',
+      value: 0,
     },
   })
 }

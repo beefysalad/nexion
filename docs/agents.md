@@ -15,7 +15,7 @@ This file serves as the primary source of truth for AI agents working on this pr
 - **ORM**: Prisma
 - **Styling**: Tailwind CSS 4
 - **UI Components**: Radix UI + shadcn/ui
-- **Authentication**: Auth.js (NextAuth v5) with Prisma Adapter
+- **Authentication**: Clerk with Google OAuth, email/password, and Prisma user sync
 - **State Management**: TanStack Query (React Query)
 - **Form Management**: React Hook Form
 - **Validation**: Zod
@@ -43,8 +43,7 @@ This file serves as the primary source of truth for AI agents working on this pr
 ├── lib/                  # Utilities and Libraries
 │   ├── api/              # Client-side API wrappers (Axios)
 │   ├── data/             # Server-side data access logic (Prisma)
-│   ├── schemas/          # Zod validation schemas
-│   ├── auth.ts           # NextAuth v5 configuration (consolidated)
+│   ├── clerk-user.ts     # Clerk-to-Prisma sync helpers
 │   ├── routes.ts         # Route definitions for auth middleware
 │   ├── prisma.ts         # Prisma client singleton
 │   └── utils.ts          # Helper functions (cn, etc.)
@@ -70,10 +69,9 @@ This file serves as the primary source of truth for AI agents working on this pr
 
 ### Authentication
 
-- Use **NextAuth v5** (Auth.js) with simplified setup.
-- All configuration consolidated in `lib/auth.ts` (session strategy, providers, callbacks).
-- Route protection handled by `proxy.ts` middleware (Next.js 16 convention).
-- Middleware imports `auth()` directly from `lib/auth.ts` for session validation.
+- Use **Clerk** for Google OAuth and email/password authentication.
+- Prisma stores the local app user, keyed by `clerkId` and merged by email when appropriate.
+- Route protection is handled by `proxy.ts` with Clerk middleware.
 - Protected routes automatically redirect unauthenticated users to `/login`.
 - Auth routes (`/login`, `/register`) automatically redirect authenticated users to `/dashboard`.
 

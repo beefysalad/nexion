@@ -61,7 +61,8 @@ npm run dev`}</code>
         <div className="rounded-xl bg-zinc-900 p-5 font-mono text-sm text-zinc-300 dark:bg-neutral-950">
           <div className="space-y-1">
             <div>DATABASE_URL=&quot;postgresql://...&quot;</div>
-            <div>AUTH_SECRET=&quot;your-secret-key&quot;</div>
+            <div>NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=&quot;pk_test_...&quot;</div>
+            <div>CLERK_SECRET_KEY=&quot;sk_test_...&quot;</div>
           </div>
         </div>
       </div>

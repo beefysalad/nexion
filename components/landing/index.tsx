@@ -1,5 +1,6 @@
 'use client'
 
+import { SignInButton, SignUpButton, useUser } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import {
   ArrowRight,
@@ -15,14 +16,13 @@ import {
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useState } from 'react'
-import { useSession } from 'next-auth/react'
 import BentoItem from './bento-item'
 import ContributeStep from './contribute-step'
 import Contributor from './contributor'
 
 const Landing = () => {
   const [copied, setCopied] = useState(false)
-  const { data: session, status } = useSession()
+  const { isLoaded, isSignedIn } = useUser()
 
   const handleCopy = () => {
     navigator.clipboard.writeText('npx create-next-app -e beefysalad/nexion')
@@ -87,12 +87,12 @@ const Landing = () => {
             </div>
 
             <div className="flex flex-col items-center gap-4">
-              {status === 'loading' ? (
+              {!isLoaded ? (
                 <div className="flex w-full flex-wrap items-center justify-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50/30 p-1 backdrop-blur-md dark:border-neutral-800/50 dark:bg-neutral-900/30">
                   <div className="h-11 w-32 animate-pulse rounded-xl bg-zinc-200 dark:bg-neutral-800" />
                   <div className="h-11 w-32 animate-pulse rounded-xl bg-zinc-200 dark:bg-neutral-800" />
                 </div>
-              ) : session ? (
+              ) : isSignedIn ? (
                 <div className="flex w-full flex-wrap items-center justify-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/30 p-1 backdrop-blur-md dark:border-emerald-900/50 dark:bg-emerald-900/20">
                   <Link href="/dashboard" className="flex-1 sm:flex-none">
                     <Button
@@ -106,31 +106,39 @@ const Landing = () => {
                 </div>
               ) : (
                 <div className="flex w-full flex-wrap items-center justify-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50/30 p-1 backdrop-blur-md dark:border-neutral-800/50 dark:bg-neutral-900/30">
-                  <Link href="/register" className="flex-1 sm:flex-none">
+                  <SignUpButton
+                    mode="modal"
+                    forceRedirectUrl="/dashboard"
+                    signInForceRedirectUrl="/dashboard"
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-11 w-full rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm sm:w-auto dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                      className="h-11 flex-1 rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm sm:w-auto sm:flex-none dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                     >
-                      Demo Register
+                      Sign Up with Clerk
                     </Button>
-                  </Link>
-                  <Link href="/login" className="flex-1 sm:flex-none">
+                  </SignUpButton>
+                  <SignInButton
+                    mode="modal"
+                    forceRedirectUrl="/dashboard"
+                    signUpForceRedirectUrl="/dashboard"
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-11 w-full rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm sm:w-auto dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                      className="h-11 flex-1 rounded-xl px-6 font-bold text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm sm:w-auto sm:flex-none dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                     >
-                      Demo Login
+                      Login with Google or Email
                     </Button>
-                  </Link>
+                  </SignInButton>
                 </div>
               )}
               <p className="flex items-center gap-2 text-xs font-medium text-zinc-400 dark:text-neutral-500">
                 <ShieldCheck className="size-3.5 text-emerald-500" />
-                {session
+                {isSignedIn
                   ? 'You are currently logged in'
-                  : 'Click the buttons above to see the auth in action'}
+                  : 'Click the buttons above to try Clerk login and signup'}
               </p>
             </div>
           </div>
@@ -185,8 +193,8 @@ const Landing = () => {
             <BentoItem
               className="md:col-span-4 md:row-span-1"
               icon={<ShieldCheck className="size-8 text-indigo-500" />}
-              title="Auth.js v5"
-              description="Secure authentication that just works out of the box."
+              title="Clerk Auth"
+              description="Google OAuth plus email/password auth with middleware and webhooks wired in."
             />
             <BentoItem
               className="md:col-span-4 md:row-span-1"
@@ -213,7 +221,7 @@ const Landing = () => {
             <p>
               Lately I&apos;ve been in the mood of building side projects using
               Next and every new project starts the same way: install Next.js,
-              set up Prisma, configure Auth.js, add React Hook Form, wire up
+              set up Prisma, configure Clerk, add React Hook Form, wire up
               TanStack Query, get dark mode working, set up the folder structure
               that makes sense, write the auth middleware, create the Prisma
               client singleton...
