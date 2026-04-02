@@ -1,31 +1,5 @@
-'use client'
-
-import { LoginForm } from '@/components/auth/login-form'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { AuthModalLauncher } from '@/components/auth/auth-modal-launcher'
 
 export default function LoginPage() {
-  const { status } = useSession()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.replace('/dashboard')
-    }
-  }, [status, router])
-
-  if (status === 'loading') {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-white dark:bg-neutral-950">
-        <div className="size-8 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-900 dark:border-neutral-800 dark:border-t-neutral-50" />
-      </div>
-    )
-  }
-
-  if (status === 'authenticated') {
-    return null
-  }
-
-  return <LoginForm />
+  return <AuthModalLauncher mode="sign-in" />
 }

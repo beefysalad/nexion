@@ -17,7 +17,6 @@ import {
   Terminal,
   Wrench,
 } from 'lucide-react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import ApiRoutes from './api-routes'
 import Architecture from './architecture'
@@ -60,7 +59,7 @@ const DocsComponent = () => {
             </h1>
             <p className="max-w-3xl text-xl leading-relaxed text-zinc-600 dark:text-neutral-400">
               A high-performance, full-stack boilerplate designed for speed and
-              reliability. Built with Next.js 16, Prisma 7, and Auth.js v5.
+              reliability. Built with Next.js 16, Prisma 7, and Clerk.
             </p>
           </header>
 

@@ -10,6 +10,7 @@ A modern Next.js 16 boilerplate with Prisma ORM, PostgreSQL, TypeScript, and Tai
 - **UI Components**: Radix UI + shadcn/ui
 - **State Management**: TanStack Query (React Query)
 - **Forms**: React Hook Form + Zod
+- **Authentication**: Clerk (Google OAuth + email/password)
 - **Theming**: next-themes (Dark Mode)
 - **Language**: TypeScript
 - **Package Manager**: npm
@@ -44,16 +45,13 @@ npm install
 cp .env.example .env.local
 ```
 
-4. Generate an authentication secret:
-
-```bash
-npx auth secret
-```
-
-5. Configure your database URL in `.env.local`:
+4. Configure your database URL and Clerk keys in `.env.local`:
 
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/your_database"
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
+CLERK_SECRET_KEY="sk_test_..."
+CLERK_WEBHOOK_SIGNING_SECRET="whsec_..."
 ```
 
 5. Set up the database:
@@ -115,28 +113,26 @@ This mounts your workspace into the container, runs Next.js in development mode,
 │   ├── auth/            # Authentication components
 │   ├── dashboard/       # Dashboard components
 │   └── ui/              # shadcn/ui primitives
-├── hooks/               # Custom React hooks (auth mutations, etc.)
+├── hooks/               # Custom React hooks
 ├── lib/                 # Utility functions and configurations
 │   ├── api/             # Client-side API wrappers (Axios)
 │   ├── data/            # Server-side data access logic (Prisma)
-│   ├── schemas/         # Zod validation schemas
-│   ├── auth.ts          # Main NextAuth configuration (Server-side)
-│   ├── auth.config.ts   # Edge-compatible NextAuth config (Middleware)
+│   ├── clerk-user.ts    # Clerk user sync helpers
 │   └── routes.ts        # Route definitions and protection rules
 ├── prisma/             # Database schema and migrations
 ├── public/             # Static assets
-├── middleware.ts       # Next.js middleware for route protection
+├── proxy.ts            # Clerk-powered route protection
 └── components.json     # shadcn/ui configuration
 ```
 
 ## Authentication
 
-This project uses **NextAuth.js v5** for authentication.
+This project uses **Clerk** for authentication.
 
-- **Strategy**: JWT (JSON Web Tokens)
-- **Providers**: Credentials (Email/Password)
-- **Protection**: Middleware-based route protection.
-- **Session Management**: `SessionProvider` in `RootLayout`.
+- **Providers**: Google OAuth + Clerk email/password
+- **Protection**: Clerk middleware in `proxy.ts`
+- **Session Management**: `ClerkProvider` in `RootLayout`
+- **User Sync**: Clerk users are mirrored into Prisma and merged by email when appropriate
 
 ### Route Protection Configuration
 
@@ -144,7 +140,6 @@ Routes are defined in `lib/routes.ts`:
 
 - `publicRoutes`: Accessible without login.
 - `authRoutes`: Redirect to dashboard if already logged in.
-- `apiAuthPrefix`: Reserved for auth API requests.
 - `protectedRoutes`: All other routes require authentication.
 
 ## Database

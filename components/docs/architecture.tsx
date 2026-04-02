@@ -35,7 +35,7 @@ const Architecture = () => {
               </li>
               <li className="flex gap-2">
                 <span className="font-mono font-bold text-zinc-900 dark:text-neutral-100">
-                  middleware.ts
+                  proxy.ts
                 </span>{' '}
                 Edge-compatible route protection
               </li>
@@ -47,18 +47,18 @@ const Architecture = () => {
               <li>
                 <strong>Auth Split:</strong> Auth logic is separated into{' '}
                 <code className="font-mono font-bold text-zinc-900 dark:text-neutral-100">
-                  auth.ts
+                  clerk-user.ts
                 </code>{' '}
                 (Node.js runtime) and{' '}
                 <code className="font-mono font-bold text-zinc-900 dark:text-neutral-100">
-                  auth.config.ts
+                  routes.ts
                 </code>{' '}
                 (Edge runtime).
               </li>
               <li>
                 <strong>Middleware:</strong> Uses{' '}
                 <code className="font-mono font-bold text-zinc-900 dark:text-neutral-100">
-                  auth.config.ts
+                  proxy.ts
                 </code>{' '}
                 to validate sessions on the Edge without needing the full
                 database adapter.

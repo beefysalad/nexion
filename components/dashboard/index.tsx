@@ -1,11 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { signOut, useSession } from 'next-auth/react'
+import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import {
   LayoutDashboard,
-  LogOut,
   BookOpen,
   ExternalLink,
   Settings,
@@ -13,7 +11,6 @@ import {
   Calendar,
   Mail,
   TrendingUp,
-  Loader2,
   FolderTree,
   Container,
   ArrowRight,
@@ -23,6 +20,7 @@ import { WhatsNewModal } from './whats-new-modal'
 import { ThemeToggle } from '../theme-toggle'
 import { useCounter, useIncrementCounter } from '@/hooks/useCounter'
 import { formatDistanceToNow } from 'date-fns'
+import type { User } from '@/app/generated/prisma/client'
 
 const projectTree = [
   {
@@ -59,11 +57,13 @@ const dockerSteps = [
   'open http://localhost:3000',
 ]
 
-const DashboardComponent = () => {
-  const { data: session } = useSession()
-  const [isLoggingOut, setIsLoggingOut] = useState(false)
-  const userName = session?.user?.name || 'Developer'
-  const userEmail = session?.user?.email || ''
+type DashboardComponentProps = {
+  user: User | null
+}
+
+const DashboardComponent = ({ user }: DashboardComponentProps) => {
+  const userName = user?.name || 'Developer'
+  const userEmail = user?.email || ''
   const { data: counter, isLoading: counterLoading } = useCounter()
   const incrementMutation = useIncrementCounter()
 
@@ -94,22 +94,20 @@ const DashboardComponent = () => {
             <div className="h-4 w-px bg-zinc-200 dark:bg-neutral-800" />
             <ThemeToggle />
             <div className="h-4 w-px bg-zinc-200 dark:bg-neutral-800" />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                setIsLoggingOut(true)
-                signOut({ callbackUrl: '/login' })
-              }}
-              disabled={isLoggingOut}
-              className="h-9 gap-2 rounded-full px-4 text-zinc-500 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
-            >
-              {isLoggingOut ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <LogOut className="size-4" />
-              )}
-            </Button>
+            <div className="flex h-9 items-center">
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox:
+                      'size-9 ring-1 ring-zinc-200 dark:ring-neutral-800',
+                    userButtonTrigger:
+                      'rounded-full focus:shadow-none focus:outline-none',
+                    userButtonPopoverCard:
+                      'border border-zinc-200 bg-white text-zinc-900 shadow-xl dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50',
+                  },
+                }}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -144,8 +142,8 @@ const DashboardComponent = () => {
                 <Calendar className="size-4 text-zinc-400" />
                 <span className="text-zinc-600 dark:text-neutral-400">
                   Member since{' '}
-                  {session?.user?.createdAt
-                    ? formatDistanceToNow(new Date(session.user.createdAt), {
+                  {user?.createdAt
+                    ? formatDistanceToNow(new Date(user.createdAt), {
                         addSuffix: true,
                       })
                     : 'recently'}
