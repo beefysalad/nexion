@@ -1,9 +1,9 @@
-import { getCounter, incrementCounter } from '@/lib/data/counter'
+import { counterService } from '@/lib/services/counter-service'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const counter = await getCounter()
+    const counter = await counterService.GetGlobalCounter()
     return NextResponse.json(counter)
   } catch {
     return NextResponse.json(
@@ -15,7 +15,7 @@ export async function GET() {
 
 export async function POST() {
   try {
-    const counter = await incrementCounter()
+    const counter = await counterService.incrementGlobalCounter()
     return NextResponse.json(counter)
   } catch {
     return NextResponse.json(

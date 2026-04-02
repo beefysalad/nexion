@@ -1,8 +1,8 @@
-import { syncCurrentUserToDatabase } from '@/lib/clerk-user'
+import { userService } from '@/lib/services/user-service'
 import DashboardComponent from '@/components/dashboard'
 
 const DashboardPage = async () => {
-  const user = await syncCurrentUserToDatabase()
+  const user = await userService.syncCurrentUserToDatabase()
 
   return <DashboardComponent user={user} />
 }

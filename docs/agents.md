@@ -42,8 +42,8 @@ This file serves as the primary source of truth for AI agents working on this pr
 ├── hooks/                # Custom React Hooks
 ├── lib/                  # Utilities and Libraries
 │   ├── api/              # Client-side API wrappers (Axios)
-│   ├── data/             # Server-side data access logic (Prisma)
-│   ├── clerk-user.ts     # Clerk-to-Prisma sync helpers
+│   ├── repositories/     # Object-style data access layers
+│   ├── services/         # Object-style backend service layers
 │   ├── routes.ts         # Route definitions for auth middleware
 │   ├── prisma.ts         # Prisma client singleton
 │   └── utils.ts          # Helper functions (cn, etc.)

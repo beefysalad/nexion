@@ -47,7 +47,7 @@ const Architecture = () => {
               <li>
                 <strong>Auth Split:</strong> Auth logic is separated into{' '}
                 <code className="font-mono font-bold text-zinc-900 dark:text-neutral-100">
-                  clerk-user.ts
+                  services/
                 </code>{' '}
                 (Node.js runtime) and{' '}
                 <code className="font-mono font-bold text-zinc-900 dark:text-neutral-100">
