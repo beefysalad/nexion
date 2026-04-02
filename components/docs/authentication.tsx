@@ -41,11 +41,11 @@ const isAuthRoute = createRouteMatcher(['/login', '/register']);`}</code>
             </p>
             <div className="overflow-hidden rounded-xl bg-zinc-900 p-3 font-mono text-xs text-zinc-300 dark:bg-neutral-950">
               {`import { auth } from '@clerk/nextjs/server';
-import { syncCurrentUserToDatabase } from '@/lib/clerk-user';
+import { userService } from '@/lib/services/user-service';
 
 export default async function Page() {
   const { userId } = await auth();
-  const user = userId ? await syncCurrentUserToDatabase() : null;
+  const user = userId ? await userService.SyncCurrentUserToDatabase() : null;
   return <div>{user?.name}</div>;
 }`}
             </div>

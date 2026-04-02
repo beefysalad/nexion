@@ -2,7 +2,7 @@ import type { User as ClerkUser, UserJSON } from '@clerk/nextjs/server'
 import { auth, currentUser } from '@clerk/nextjs/server'
 import { Prisma } from '@/app/generated/prisma/client'
 
-import prisma from '@/lib/prisma'
+import { userRepository } from '@/lib/repositories/user-repository'
 
 type SyncableClerkUser = {
   clerkId: string
@@ -70,95 +70,81 @@ const mapClerkWebhookUser = (user: UserJSON): SyncableClerkUser | null => {
   }
 }
 
-export async function upsertClerkUser(input: SyncableClerkUser) {
-  try {
-    return await prisma.user.upsert({
-      where: { clerkId: input.clerkId },
-      update: {
-        email: input.email,
-        name: input.name,
-        image: input.imageUrl,
-        emailVerified: input.emailVerified,
-      },
-      create: {
+export const userService = {
+  async upsertClerkUser(input: SyncableClerkUser) {
+    try {
+      return await userRepository.upsertByClerkId({
         clerkId: input.clerkId,
         email: input.email,
         name: input.name,
         image: input.imageUrl,
         emailVerified: input.emailVerified,
-        hashedPassword: null,
-      },
-    })
-  } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === 'P2002'
-    ) {
-      const existingByEmail = await prisma.user.findUnique({
-        where: { email: input.email },
       })
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        const existingByEmail = await userRepository.findByEmail(input.email)
 
-      if (!existingByEmail) {
-        throw error
+        if (!existingByEmail) {
+          throw error
+        }
+
+        return userRepository.linkClerkIdentityByEmail({
+          userId: existingByEmail.id,
+          clerkId: input.clerkId,
+          name: input.name,
+          image: input.imageUrl,
+          emailVerified: input.emailVerified,
+          currentName: existingByEmail.name,
+          currentEmailVerified: existingByEmail.emailVerified,
+        })
       }
 
-      return prisma.user.update({
-        where: { id: existingByEmail.id },
-        data: {
-          clerkId: input.clerkId,
-          name: input.name ?? existingByEmail.name,
-          image: input.imageUrl,
-          emailVerified: input.emailVerified ?? existingByEmail.emailVerified,
-        },
-      })
+      throw error
+    }
+  },
+
+  async syncCurrentUserToDatabase() {
+    const { userId } = await auth()
+
+    if (!userId) {
+      return null
     }
 
-    throw error
-  }
-}
+    const clerkUser = await currentUser()
 
-export async function syncCurrentUserToDatabase() {
-  const { userId } = await auth()
+    if (!clerkUser) {
+      return null
+    }
 
-  if (!userId) {
-    return null
-  }
+    const mappedUser = mapClerkUser(clerkUser)
 
-  const clerkUser = await currentUser()
+    if (!mappedUser) {
+      return null
+    }
 
-  if (!clerkUser) {
-    return null
-  }
+    return userService.upsertClerkUser(mappedUser)
+  },
 
-  const mappedUser = mapClerkUser(clerkUser)
+  async syncWebhookUserToDatabase(user: UserJSON) {
+    const mappedUser = mapClerkWebhookUser(user)
 
-  if (!mappedUser) {
-    return null
-  }
+    if (!mappedUser) {
+      return null
+    }
 
-  return upsertClerkUser(mappedUser)
-}
+    return userService.upsertClerkUser(mappedUser)
+  },
 
-export async function syncWebhookUserToDatabase(user: UserJSON) {
-  const mappedUser = mapClerkWebhookUser(user)
+  async deleteClerkUserFromDatabase(clerkId: string) {
+    const existingUser = await userRepository.findByClerkId(clerkId)
 
-  if (!mappedUser) {
-    return null
-  }
+    if (!existingUser) {
+      return null
+    }
 
-  return upsertClerkUser(mappedUser)
-}
-
-export async function deleteClerkUserFromDatabase(clerkId: string) {
-  const existingUser = await prisma.user.findUnique({
-    where: { clerkId },
-  })
-
-  if (!existingUser) {
-    return null
-  }
-
-  return prisma.user.delete({
-    where: { id: existingUser.id },
-  })
+    return userRepository.deleteById(existingUser.id)
+  },
 }

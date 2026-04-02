@@ -116,8 +116,8 @@ This mounts your workspace into the container, runs Next.js in development mode,
 ├── hooks/               # Custom React hooks
 ├── lib/                 # Utility functions and configurations
 │   ├── api/             # Client-side API wrappers (Axios)
-│   ├── data/            # Server-side data access logic (Prisma)
-│   ├── clerk-user.ts    # Clerk user sync helpers
+│   ├── repositories/    # Object-style data access layers
+│   ├── services/        # Object-style backend service layers
 │   └── routes.ts        # Route definitions and protection rules
 ├── prisma/             # Database schema and migrations
 ├── public/             # Static assets
