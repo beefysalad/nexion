@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { api } from '@/lib/axios'
 
 export interface Counter {
   id: number
@@ -8,11 +8,16 @@ export interface Counter {
 }
 
 export const getCounter = async (): Promise<Counter> => {
-  const response = await axios.get('/api/counter')
+  const response = await api.get('/counter')
   return response.data
 }
 
 export const incrementCounter = async (): Promise<Counter> => {
-  const response = await axios.post('/api/counter')
+  const response = await api.post('/counter')
+  return response.data
+}
+
+export const updateCounter = async (value: number): Promise<Counter> => {
+  const response = await api.patch('/counter', { value })
   return response.data
 }
