@@ -1,4 +1,5 @@
 import { counterService } from '@/lib/services/counter-service'
+import { withApiAuth } from '@/lib/api/with-auth'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -7,16 +8,16 @@ const counterSchema = z.object({
   value: z.number().int().min(0),
 })
 
-export async function GET() {
+export const GET = withApiAuth(async () => {
   try {
     const counter = await counterService.GetGlobalCounter()
     return NextResponse.json(counter)
   } catch {
     return NextResponse.json({ error: 'Failed to fetch counter' }, { status: 500 })
   }
-}
+})
 
-export async function POST() {
+export const POST = withApiAuth(async () => {
   try {
     const counter = await counterService.incrementGlobalCounter()
     return NextResponse.json(counter)
@@ -25,10 +26,10 @@ export async function POST() {
       { error: 'Failed to increment counter' },
       { status: 500 }
     )
-  }
-}
+  } 
+})
 
-export async function PATCH(req: Request) {
+export const PATCH = withApiAuth(async (req: Request) => {
   try {
     const body = await req.json()
     const result = counterSchema.safeParse(body)
@@ -48,4 +49,4 @@ export async function PATCH(req: Request) {
       { status: 500 }
     )
   }
-}
+})
