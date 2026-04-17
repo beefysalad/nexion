@@ -14,4 +14,8 @@ export const counterService = {
   incrementGlobalCounter() {
     return counterRepository.incrementGlobal()
   },
+
+  setGlobalCounter(value: number) {
+    return counterRepository.updateGlobal(value)
+  },
 }

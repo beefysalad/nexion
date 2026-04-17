@@ -28,4 +28,15 @@ export const counterRepository = {
       },
     })
   },
+
+  updateGlobal(value: number) {
+    return prisma.count.upsert({
+      where: { key: 'global_counter' },
+      update: { value },
+      create: {
+        key: 'global_counter',
+        value,
+      },
+    })
+  },
 }
