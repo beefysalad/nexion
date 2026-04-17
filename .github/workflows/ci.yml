@@ -30,3 +30,4 @@ jobs:
           DATABASE_URL: 'postgresql://dummy:dummy@localhost:5432/dummy'
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: 'pk_test_ci_placeholder'
           CLERK_SECRET_KEY: 'sk_test_ci_placeholder'
+          SKIP_ENV_VALIDATION: 'true'
