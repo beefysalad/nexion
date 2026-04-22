@@ -11,7 +11,7 @@ import {
 } from 'react'
 import { usePathname } from 'next/navigation'
 
-export type LoadingKind = 'redirect' | 'render' | 'data'
+export type LoadingKind = 'redirect' | 'render'
 
 type LoadingState = {
   isLoading: boolean
@@ -29,7 +29,6 @@ const LoadingContext = createContext<LoadingContextValue | null>(null)
 const defaultLabels: Record<LoadingKind, string> = {
   redirect: 'Opening page',
   render: 'Loading page',
-  data: 'Loading data',
 }
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
