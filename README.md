@@ -20,11 +20,12 @@ A modern Next.js 16 boilerplate with Prisma ORM, PostgreSQL, TypeScript, and Tai
 ## Prerequisites
 
 - Node.js 20+
-- PostgreSQL database for local non-Docker development
-- Docker + Docker Compose for the containerized workflow
-- npm or yarn
+- Docker + Docker Compose for the local PostgreSQL database
+- npm
 
-## Installation
+## Local Development
+
+The recommended local workflow is to run PostgreSQL in Docker and run the Next.js app directly with npm.
 
 1. Clone the repository:
 
@@ -39,37 +40,41 @@ cd nexion
 npm install
 ```
 
-3. Set up environment variables:
+3. Copy the example environment file:
 
 ```bash
 cp .env.example .env.local
 ```
 
-4. Configure your database URL and Clerk keys in `.env.local`:
+4. Configure your Clerk keys in `.env.local`:
 
 ```
-DATABASE_URL="postgresql://username:password@localhost:5432/your_database"
+DATABASE_URL="postgresql://nexion:nexion@localhost:5433/nexion"
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
 CLERK_SECRET_KEY="sk_test_..."
 CLERK_WEBHOOK_SIGNING_SECRET="whsec_..."
 ```
 
-5. Set up the database:
+5. Start the local PostgreSQL database:
+
+```bash
+docker compose up -d db
+```
+
+6. Run migrations and generate the Prisma client:
 
 ```bash
 npx prisma migrate dev
 npx prisma generate
 ```
 
-6. Seed the database (optional):
+7. Seed the database, if you want the starter data:
 
 ```bash
 npm run db:seed
 ```
 
-## Getting Started
-
-Start the development server:
+8. Start the development server:
 
 ```bash
 npm run dev
@@ -77,33 +82,39 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Docker Quickstart
+### Local Database Notes
 
-1. Copy the example environment file:
+The Docker database is exposed on `localhost:5433`, matching `.env.example`. This avoids conflicting with a local PostgreSQL server on `localhost:5432`.
+
+If you want Docker to use `5432` instead, change the host port in `docker-compose.yml`:
+
+```yaml
+ports:
+  - '5432:5432'
+```
+
+Then update `.env.local` to match:
+
+```env
+DATABASE_URL="postgresql://nexion:nexion@localhost:5432/nexion"
+```
+
+## Docker Production Smoke Test
+
+You can still build and run the app in Docker for a production-style smoke test:
 
 ```bash
 cp .env.example .env
-```
-
-2. Start the app and database:
-
-```bash
 docker compose up --build
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-The Docker entrypoint runs Prisma migrations and seeds the database before the Next.js server starts.
+The Docker entrypoint runs Prisma migrations before the Next.js server starts. It does not seed the database automatically; run `npm run db:seed` yourself when you need starter data.
 
 ## Docker Development
 
-For hot reload while editing files locally, use the development Compose file instead:
-
-```bash
-docker compose -f docker-compose.dev.yml up --build
-```
-
-This mounts your workspace into the container, runs Next.js in development mode, and watches for file changes.
+For day-to-day development, prefer the local workflow above: `docker compose up -d db` for PostgreSQL and `npm run dev` for the app. The `docker-compose.dev.yml` file remains available for an all-in-Docker development workflow, but it is not the recommended path.
 
 ## Project Structure
 

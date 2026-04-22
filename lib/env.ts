@@ -15,10 +15,9 @@ const envSchema = z.object({
 const parsedEnv = envSchema.safeParse(process.env)
 
 if (!parsedEnv.success) {
-  console.error('❌ Invalid environment variables:', parsedEnv.error.flatten().fieldErrors)
-
   // Only throw if we are NOT explicitly skipping validation (e.g. during build/CI)
   if (process.env.SKIP_ENV_VALIDATION !== 'true') {
+    console.error('❌ Invalid environment variables:', parsedEnv.error.flatten().fieldErrors)
     throw new Error('Invalid environment variables')
   }
 }
