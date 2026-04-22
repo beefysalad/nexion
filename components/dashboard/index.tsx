@@ -14,6 +14,7 @@ import {
   FolderTree,
   Container,
   ArrowRight,
+  Loader2,
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { WhatsNewModal } from './whats-new-modal'
@@ -21,6 +22,7 @@ import { ThemeToggle } from '../theme-toggle'
 import { useCounter, useIncrementCounter } from '@/hooks/useCounter'
 import { formatDistanceToNow } from 'date-fns'
 import type { User } from '@/app/generated/prisma/client'
+import { useLoading } from '@/app/providers/loading-provider'
 
 const projectTree = [
   {
@@ -66,9 +68,17 @@ const DashboardComponent = ({ user }: DashboardComponentProps) => {
   const userEmail = user?.email || ''
   const { data: counter, isLoading: counterLoading } = useCounter()
   const incrementMutation = useIncrementCounter()
+  const { startLoading, stopLoading } = useLoading()
 
   const handleIncrement = () => {
     incrementMutation.mutate()
+  }
+
+  const handlePreviewLoading = () => {
+    startLoading('render', 'Preview loading')
+    window.setTimeout(() => {
+      stopLoading('render')
+    }, 3500)
   }
 
   return (
@@ -85,6 +95,16 @@ const DashboardComponent = ({ user }: DashboardComponentProps) => {
           </div>
 
           <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handlePreviewLoading}
+              className="hidden h-9 rounded-full px-3 text-xs font-semibold sm:inline-flex"
+            >
+              <Loader2 className="size-3.5" />
+              Preview loader
+            </Button>
             <Link
               href="/docs"
               className="flex h-9 items-center gap-2 rounded-full px-4 text-sm font-medium text-zinc-500 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"

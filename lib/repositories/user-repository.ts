@@ -15,28 +15,39 @@ export const userRepository = {
     })
   },
 
-  upsertByClerkId(input: {
+  createClerkUser(input: {
     clerkId: string
     email: string
     name: string | null
     image: string | null
     emailVerified: Date | null
   }) {
-    return prisma.user.upsert({
-      where: { clerkId: input.clerkId },
-      update: {
-        email: input.email,
-        name: input.name,
-        image: input.image,
-        emailVerified: input.emailVerified,
-      },
-      create: {
+    return prisma.user.create({
+      data: {
         clerkId: input.clerkId,
         email: input.email,
         name: input.name,
         image: input.image,
         emailVerified: input.emailVerified,
         hashedPassword: null,
+      },
+    })
+  },
+
+  updateClerkUserById(input: {
+    userId: string
+    email: string
+    name: string | null
+    image: string | null
+    emailVerified: Date | null
+  }) {
+    return prisma.user.update({
+      where: { id: input.userId },
+      data: {
+        email: input.email,
+        name: input.name,
+        image: input.image,
+        emailVerified: input.emailVerified,
       },
     })
   },
