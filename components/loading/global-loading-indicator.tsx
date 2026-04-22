@@ -1,7 +1,5 @@
 'use client'
 
-import { useIsFetching, useIsMutating } from '@tanstack/react-query'
-
 import { useLoading, type LoadingKind } from '@/app/providers/loading-provider'
 import { Spinner } from '@/components/ui/spinner'
 import { cn } from '@/lib/utils'
@@ -9,19 +7,12 @@ import { cn } from '@/lib/utils'
 const loadingLabels: Record<LoadingKind, string> = {
   redirect: 'Opening page',
   render: 'Loading page',
-  data: 'Loading data',
 }
 
 export function GlobalLoadingIndicator() {
   const loading = useLoading()
-  const initialQueries = useIsFetching({
-    predicate: (query) => query.state.data === undefined,
-  })
-  const mutations = useIsMutating()
-
-  const kind: LoadingKind | null =
-    loading.kind ?? (mutations > 0 || initialQueries > 0 ? 'data' : null)
-  const isVisible = loading.isLoading || initialQueries > 0 || mutations > 0
+  const kind = loading.kind
+  const isVisible = loading.isLoading
   const label = loading.label ?? (kind ? loadingLabels[kind] : 'Loading')
 
   return (
@@ -40,9 +31,7 @@ export function GlobalLoadingIndicator() {
               'absolute inset-0 rounded-full border-2 border-current opacity-20',
               kind === 'redirect'
                 ? 'text-blue-500'
-                : kind === 'render'
-                  ? 'text-violet-500'
-                  : 'text-emerald-500'
+                : 'text-violet-500'
             )}
           />
           <Spinner
@@ -50,9 +39,7 @@ export function GlobalLoadingIndicator() {
               'size-10',
               kind === 'redirect'
                 ? 'text-blue-500'
-                : kind === 'render'
-                  ? 'text-violet-500'
-                  : 'text-emerald-500'
+                : 'text-violet-500'
             )}
           />
         </div>
