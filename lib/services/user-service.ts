@@ -156,6 +156,22 @@ export const userService = {
 
     return userRepository.deleteById(existingUser.id)
   },
+
+  async getUserByClerkId(clerkId: string) {
+    return userRepository.findByClerkId(clerkId)
+  },
+
+  async completeOnboardingByClerkId(clerkId: string): Promise<User> {
+    const existingUser = await userRepository.findByClerkId(clerkId)
+
+    if (!existingUser) {
+      throw new Error('User not found')
+    }
+
+    return userRepository.completeOnboardingById({
+      userId: existingUser.id,
+    })
+  },
 }
 
 const isUniqueConstraintError = (error: unknown) => {

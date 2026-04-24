@@ -49,6 +49,7 @@ When making changes, follow the rules below unless the user explicitly asks for 
 - Always prefer existing **shadcn/ui** components from `components/ui/` over native HTML controls when an equivalent exists.
 - Example: use the shared `Button` component instead of a plain `<button>` for application actions.
 - If a needed shadcn component does not exist yet, prompt the user before adding or installing it.
+- Avoid using the `Sparkles` icon unless the user explicitly wants it or it is truly necessary for the design.
 
 ### Folder Organization
 
@@ -71,6 +72,8 @@ When making changes, follow the rules below unless the user explicitly asks for 
 - Database access belongs in `lib/repositories/`.
 - Business logic belongs in `lib/services/`.
 - API routes should stay thin and delegate work to services.
+- Do not run Prisma migrations or Prisma client generation yourself. Ask the user to run them.
+- Do not run `npm install` yourself. Ask the user to run it.
 
 ### Typing
 

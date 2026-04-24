@@ -15,6 +15,12 @@ export const userRepository = {
     })
   },
 
+  findById(userId: string) {
+    return prisma.user.findUnique({
+      where: { id: userId },
+    })
+  },
+
   createClerkUser(input: {
     clerkId: string
     email: string
@@ -48,6 +54,18 @@ export const userRepository = {
         name: input.name,
         image: input.image,
         emailVerified: input.emailVerified,
+      },
+    })
+  },
+
+  completeOnboardingById(input: {
+    userId: string
+  }) {
+    return prisma.user.update({
+      where: { id: input.userId },
+      data: {
+        onboardingCompleted: true,
+        onboardingCompletedAt: new Date(),
       },
     })
   },
