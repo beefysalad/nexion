@@ -45,9 +45,6 @@ export default function OnboardingComponent({
         <div className="grid w-full gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <section className="flex flex-col justify-between rounded-3xl bg-zinc-900 p-8 text-white dark:bg-neutral-900">
             <div>
-              <div className="inline-flex size-11 items-center justify-center rounded-2xl bg-white/10">
-                <Sparkles className="size-5" />
-              </div>
               <h1 className="mt-6 text-4xl font-bold tracking-tight">
                 Welcome to your new app.
               </h1>
