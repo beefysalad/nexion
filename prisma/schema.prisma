@@ -21,13 +21,15 @@ model Count {
 }
 
 model User {
-  id             String    @id @default(cuid())
-  clerkId        String?   @unique
-  name           String?
-  email          String    @unique
-  emailVerified  DateTime?
-  image          String?
-  hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id                   String    @id @default(cuid())
+  clerkId              String?   @unique
+  name                 String?
+  email                String    @unique
+  emailVerified        DateTime?
+  image                String?
+  hashedPassword       String?
+  onboardingCompleted  Boolean   @default(false)
+  onboardingCompletedAt DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 }
