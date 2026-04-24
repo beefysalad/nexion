@@ -1,5 +1,6 @@
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 import {
   ArrowLeft,
   BookOpen,
@@ -194,9 +195,11 @@ const DocsComponent = () => {
                 className="group flex items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50/50 p-4 transition-all hover:border-zinc-900 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/30 dark:hover:border-neutral-50 dark:hover:bg-neutral-900"
               >
                 <div className="flex size-10 items-center justify-center overflow-hidden rounded-full bg-zinc-900 text-white dark:bg-neutral-50 dark:text-neutral-900">
-                  <img
+                  <Image
                     src="/ptrck.jpg"
                     alt="beefysalad"
+                    width={40}
+                    height={40}
                     className="h-full w-full object-cover"
                   />
                 </div>

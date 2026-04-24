@@ -1,5 +1,6 @@
 import { auth } from '@clerk/nextjs/server'
-import { NextResponse } from 'next/server'
+
+import { apiError } from '@/lib/api/response'
 
 type RouteContext = Record<string, unknown>
 
@@ -20,7 +21,7 @@ export function withApiAuth<TContext extends RouteContext = RouteContext>(
     const { userId } = await auth()
 
     if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return apiError('Unauthorized', 401)
     }
 
     return handler(request, { userId }, context)

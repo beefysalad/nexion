@@ -1,11 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
 import { getCounter, incrementCounter } from '@/lib/api/counter'
+
+const counterQueryKey = ['counter'] as const
 
 export const useCounter = () => {
   return useQuery({
-    queryKey: ['counter'],
+    queryKey: counterQueryKey,
     queryFn: getCounter,
-    refetchInterval: 5000, //evry 5 seconds
+    refetchInterval: 5000,
   })
 }
 
@@ -15,7 +18,7 @@ export const useIncrementCounter = () => {
   return useMutation({
     mutationFn: incrementCounter,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['counter'] })
+      queryClient.invalidateQueries({ queryKey: counterQueryKey })
     },
   })
 }

@@ -19,7 +19,10 @@ import {
 import { Button } from '../ui/button'
 import { WhatsNewModal } from './whats-new-modal'
 import { ThemeToggle } from '../theme-toggle'
-import { useCounter, useIncrementCounter } from '@/hooks/useCounter'
+import {
+  useCounter,
+  useIncrementCounter,
+} from '@/hooks/dashboard/use-counter'
 import { formatDistanceToNow } from 'date-fns'
 import type { User } from '@/app/generated/prisma/client'
 import { useLoading } from '@/app/providers/loading-provider'
