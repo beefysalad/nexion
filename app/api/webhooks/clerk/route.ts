@@ -1,7 +1,8 @@
 import type { WebhookEvent } from '@clerk/nextjs/server'
 import { verifyWebhook } from '@clerk/nextjs/webhooks'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
+import { apiError, apiSuccess } from '@/lib/api/response'
 import { userService } from '@/lib/services/user-service'
 
 export async function POST(request: NextRequest) {
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest) {
     const message =
       error instanceof Error ? error.message : 'Unable to verify webhook'
 
-    return NextResponse.json({ error: message }, { status: 400 })
+    return apiError(message, 400)
   }
 
   try {
@@ -31,11 +32,11 @@ export async function POST(request: NextRequest) {
         break
     }
 
-    return NextResponse.json({ ok: true })
+    return apiSuccess({ ok: true })
   } catch (error) {
     const message =
       error instanceof Error ? error.message : 'Unable to process webhook'
 
-    return NextResponse.json({ error: message }, { status: 500 })
+    return apiError(message)
   }
 }

@@ -1,4 +1,5 @@
 import { api } from '@/lib/axios'
+import type { ApiSuccessResponse } from '@/lib/api/response'
 
 export interface Counter {
   id: number
@@ -8,16 +9,18 @@ export interface Counter {
 }
 
 export const getCounter = async (): Promise<Counter> => {
-  const response = await api.get('/counter')
-  return response.data
+  const response = await api.get<ApiSuccessResponse<Counter>>('/counter')
+  return response.data.data
 }
 
 export const incrementCounter = async (): Promise<Counter> => {
-  const response = await api.post('/counter')
-  return response.data
+  const response = await api.post<ApiSuccessResponse<Counter>>('/counter')
+  return response.data.data
 }
 
 export const updateCounter = async (value: number): Promise<Counter> => {
-  const response = await api.patch('/counter', { value })
-  return response.data
+  const response = await api.patch<ApiSuccessResponse<Counter>>('/counter', {
+    value,
+  })
+  return response.data.data
 }

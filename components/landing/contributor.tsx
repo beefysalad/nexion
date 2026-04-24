@@ -1,4 +1,5 @@
 import { Github } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -19,7 +20,13 @@ const Contributor = ({
     >
       <div className="flex size-16 items-center justify-center overflow-hidden rounded-full border border-zinc-200 bg-white text-neutral-50 shadow-lg shadow-zinc-200/50 transition-all group-hover:scale-110 group-hover:border-zinc-900 group-hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-900 dark:shadow-none dark:group-hover:border-neutral-50">
         {image ? (
-          <img src={image} alt={name} className="h-full w-full object-cover" />
+          <Image
+            src={image}
+            alt={name}
+            width={64}
+            height={64}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <Github className="size-8 text-zinc-400 group-hover:text-zinc-900 dark:text-neutral-500 dark:group-hover:text-neutral-100" />
         )}
